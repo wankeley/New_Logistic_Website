@@ -2,39 +2,72 @@
 
 <footer>
     <div class="container">
-        <div class="footer-grid">
+        <div class="grid-4" style="margin-bottom: 3rem;">
             <div class="footer-col">
-                <h4>
-                    <%= settings.site_name || 'LogisticCo' %>
-                </h4>
-                <p>Moving your business forward with reliable application transport solutions.</p>
+                <div class="logo mb-1" style="color: white; justify-content: flex-start;">
+                    <i class="fas fa-cube" style="color: var(--primary-light);"></i>
+                    <span>
+                        <%= settings.site_name || 'LogisticCo' %>
+                    </span>
+                </div>
+                <p style="color: #94a3b8;">Global logistics partner providing reliable shipping, warehousing, and
+                    transport solutions tailored for Ghana and beyond.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="/services">Services</a>
-                <a href="/tracking">Tracking</a>
+
+            <div class="footer-col footer-links">
+                <h4>Company</h4>
                 <a href="/about">About Us</a>
-                <a href="/admin/login">Admin Login</a>
+                <a href="/services">Our Services</a>
+                <a href="/contact">Contact</a>
             </div>
+
+            <div class="footer-col footer-links">
+                <h4>Customer</h4>
+                <a href="/tracking">Track Shipment</a>
+                <a href="/quote">Request Quote</a>
+                <a href="/login">My Account</a>
+            </div>
+
             <div class="footer-col">
-                <h4>Contact</h4>
-                <p><i class="fas fa-map-marker-alt"></i>
-                    <%= settings.address || 'Accra, Ghana' %>
-                </p>
-                <p><i class="fas fa-phone"></i>
-                    <%= settings.contact_phone || '+233 20 000 0000' %>
-                </p>
-                <p><i class="fas fa-envelope"></i>
-                    <%= settings.contact_email || 'info@logistics.com' %>
-                </p>
+                <h4>Contact Info</h4>
+                <ul style="color: #94a3b8;">
+                    <li class="mb-1">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-light); margin-right: 10px;"></i>
+                        <%= settings.address || 'Accra, Ghana' %>
+                    </li>
+                    <li class="mb-1">
+                        <i class="fas fa-phone" style="color: var(--primary-light); margin-right: 10px;"></i>
+                        <%= settings.contact_phone || '+233 20 000 0000' %>
+                    </li>
+                    <li class="mb-1">
+                        <i class="fas fa-envelope" style="color: var(--primary-light); margin-right: 10px;"></i>
+                        <%= settings.contact_email || 'info@logistics.com' %>
+                    </li>
+                </ul>
             </div>
         </div>
+
         <div class="copyright">
-            &copy; <%= new Date().getFullYear() %>
-                <%= settings.site_name %>. All rights reserved.
+            <p>&copy; <%= new Date().getFullYear() %>
+                    <%= settings.site_name || 'LogisticCo' %>. All rights reserved. | <a href="/admin/login"
+                            style="color: #64748b;">Admin</a></p>
         </div>
     </div>
 </footer>
+
+<script>
+    // Sticky Header Effect
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('header');
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+</script>
 </body>
 
 </html>

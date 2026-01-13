@@ -1,93 +1,155 @@
 <%- include('partials/header') %>
-    <section class="hero"
-        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?technology,logistics');">
+
+    <!-- Page Hero -->
+    <section class="hero" style="padding: 6rem 0;">
+        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=1600&q=80" alt="Tracking"
+            class="hero-bg">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1>Track Your Shipment</h1>
-            <p>Real-time updates on your cargo's location and status.</p>
+            <div class="hero-content text-center" style="max-width: 100%;">
+                <h1 class="text-white">Track Your Shipment</h1>
+                <p style="max-width: 600px; margin: 0 auto;">Enter your tracking ID to get real-time updates on your
+                    cargo location and status.</p>
+            </div>
         </div>
     </section>
 
-    <section>
+    <!-- Tracking Form -->
+    <section class="section-padding">
         <div class="container">
-            <div class="tracking-widget-home" style="margin: 0 auto; margin-top:-3rem;">
-                <form action="/tracking" method="GET" style="display:flex; width:100%; gap:1rem;">
-                    <input type="text" name="id" placeholder="Enter Tracking ID (e.g., TRK-12345)"
-                        value="<%= trackingId %>" required>
-                    <button type="submit" class="btn">Track</button>
+            <div class="form-card" style="max-width: 700px;">
+                <form action="/tracking" method="GET">
+                    <div class="form-group">
+                        <label for="trackingId"><i class="fas fa-search" style="margin-right: 8px;"></i>Tracking
+                            ID</label>
+                        <input type="text" id="trackingId" name="id" class="form-control"
+                            placeholder="Enter Tracking ID (e.g., TRK-12345)"
+                            value="<%= typeof trackingId !== 'undefined' ? trackingId : '' %>" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-map-marker-alt"></i> Track
+                        Shipment</button>
                 </form>
             </div>
 
-            <% if (error) { %>
-                <div class="tracking-result" style="text-align:center; color: #ef4444;">
-                    <h3><i class="fas fa-exclamation-circle"></i>
-                        <%= error %>
-                    </h3>
-                </div>
-                <% } %>
+            <% if (typeof shipment !=='undefined' && shipment) { %>
+                <!-- Tracking Result -->
+                <div class="card" style="max-width: 800px; margin: 3rem auto 0;">
+                    <div class="flex-between" style="flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                        <div>
+                            <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Tracking ID</p>
+                            <h3 style="margin: 0; color: var(--primary-color);">
+                                <%= shipment.tracking_id %>
+                            </h3>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="status-badge" style="
+                        display: inline-block;
+                        padding: 0.5rem 1rem;
+                        border-radius: 50px;
+                        font-weight: 600;
+                        font-size: 0.85rem;
+                        <% if (shipment.status === 'Delivered') { %>
+                            background: #dcfce7; color: #16a34a;
+                        <% } else if (shipment.status === 'In Transit') { %>
+                            background: #dbeafe; color: #2563eb;
+                        <% } else { %>
+                            background: #fef3c7; color: #d97706;
+                        <% } %>
+                    ">
+                                <i
+                                    class="fas <%= shipment.status === 'Delivered' ? 'fa-check-circle' : shipment.status === 'In Transit' ? 'fa-shipping-fast' : 'fa-clock' %>"></i>
+                                <%= shipment.status %>
+                            </span>
+                        </div>
+                    </div>
 
-                    <% if (shipment) { %>
-                        <div class="tracking-result">
+                    <!-- Status Progress Bar -->
+                    <div style="position: relative; margin: 3rem 0;">
+                        <div style="display: flex; justify-content: space-between; position: relative;">
                             <div
-                                style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:2rem; border-bottom:1px solid #e2e8f0; padding-bottom:1rem;">
-                                <div>
-                                    <h2 style="margin-bottom:0.5rem; font-size:1.5rem;">Tracking ID: <span
-                                            style="color:var(--primary-color)">
-                                            <%= shipment.tracking_number %>
-                                        </span></h2>
-                                    <p style="margin:0; color:#64748b;">Estimated Delivery: <strong>
-                                            <%= shipment.estimated_delivery %>
-                                        </strong></p>
-                                </div>
-                                <div
-                                    style="background:var(--primary-color); color:white; padding:0.5rem 1rem; border-radius:4px; font-weight:600;">
-                                    <%= shipment.status %>
-                                </div>
+                                style="position: absolute; top: 15px; left: 5%; width: 90%; height: 4px; background: #e2e8f0; z-index: 0;">
                             </div>
+                            <div style="
+                        position: absolute; 
+                        top: 15px; 
+                        left: 5%; 
+                        height: 4px; 
+                        background: var(--primary-color); 
+                        z-index: 1;
+                        width: <%= shipment.status === 'Pending' ? '0%' : shipment.status === 'In Transit' ? '45%' : '90%' %>;
+                    "></div>
 
-                            <div class="grid-2">
-                                <div>
-                                    <h4>Origin</h4>
-                                    <p class="lead">
-                                        <%= shipment.origin %>
-                                    </p>
-                                    <small style="color:#64748b">Sender: <%= shipment.sender_name %></small>
-                                </div>
-                                <div style="text-align:right">
-                                    <h4>Destination</h4>
-                                    <p class="lead">
-                                        <%= shipment.destination %>
-                                    </p>
-                                    <small style="color:#64748b">Receiver: <%= shipment.receiver_name %></small>
-                                </div>
-                            </div>
-
-                            <div class="status-bar">
-                                <div class="status-point active">
-                                    <span class="status-label">Picked Up</span>
-                                </div>
+                            <div class="text-center" style="position: relative; z-index: 2;">
                                 <div
-                                    class="status-point <%= ['In Transit', 'Out for Delivery', 'Delivered'].includes(shipment.status) ? 'active' : '' %>">
-                                    <span class="status-label">In Transit</span>
+                                    style="width: 35px; height: 35px; border-radius: 50%; background: <%= shipment.status !== '' ? 'var(--primary-color)' : '#e2e8f0' %>; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                    <i class="fas fa-box"></i>
                                 </div>
-                                <div
-                                    class="status-point <%= ['Out for Delivery', 'Delivered'].includes(shipment.status) ? 'active' : '' %>">
-                                    <span class="status-label">Out for Delivery</span>
-                                </div>
-                                <div class="status-point <%= shipment.status === 'Delivered' ? 'active' : '' %>">
-                                    <span class="status-label">Delivered</span>
-                                </div>
+                                <p style="margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600;">Pending</p>
                             </div>
-
-                            <div style="background:#f8fafc; padding:1.5rem; border-radius:8px; margin-top:2rem;">
-                                <h4><i class="fas fa-map-marker-alt"
-                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Current Location
-                                </h4>
-                                <p>
-                                    <%= shipment.current_location %>
-                                </p>
+                            <div class="text-center" style="position: relative; z-index: 2;">
+                                <div
+                                    style="width: 35px; height: 35px; border-radius: 50%; background: <%= shipment.status === 'In Transit' || shipment.status === 'Delivered' ? 'var(--primary-color)' : '#e2e8f0' %>; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <p style="margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600;">In Transit</p>
+                            </div>
+                            <div class="text-center" style="position: relative; z-index: 2;">
+                                <div
+                                    style="width: 35px; height: 35px; border-radius: 50%; background: <%= shipment.status === 'Delivered' ? 'var(--primary-color)' : '#e2e8f0' %>; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <p style="margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600;">Delivered</p>
                             </div>
                         </div>
-                        <% } %>
+                    </div>
+
+                    <!-- Shipment Details -->
+                    <div class="grid-2"
+                        style="gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                        <div>
+                            <p style="color: var(--text-light); margin-bottom: 0.25rem; font-size: 0.85rem;"><i
+                                    class="fas fa-map-pin" style="margin-right: 8px;"></i>Origin</p>
+                            <p style="font-weight: 600; color: var(--secondary-color);">
+                                <%= shipment.origin %>
+                            </p>
+                        </div>
+                        <div>
+                            <p style="color: var(--text-light); margin-bottom: 0.25rem; font-size: 0.85rem;"><i
+                                    class="fas fa-flag-checkered" style="margin-right: 8px;"></i>Destination</p>
+                            <p style="font-weight: 600; color: var(--secondary-color);">
+                                <%= shipment.destination %>
+                            </p>
+                        </div>
+                        <div>
+                            <p style="color: var(--text-light); margin-bottom: 0.25rem; font-size: 0.85rem;"><i
+                                    class="fas fa-location-arrow" style="margin-right: 8px;"></i>Current Location</p>
+                            <p style="font-weight: 600; color: var(--secondary-color);">
+                                <%= shipment.current_location || 'Updating...' %>
+                            </p>
+                        </div>
+                        <div>
+                            <p style="color: var(--text-light); margin-bottom: 0.25rem; font-size: 0.85rem;"><i
+                                    class="fas fa-calendar" style="margin-right: 8px;"></i>Last Updated</p>
+                            <p style="font-weight: 600; color: var(--secondary-color);">
+                                <%= new Date(shipment.updated_at).toLocaleDateString() %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% } else if (typeof trackingId !=='undefined' && trackingId && !shipment) { %>
+                    <!-- No Result -->
+                    <div class="card text-center" style="max-width: 600px; margin: 3rem auto 0;">
+                        <div class="icon-box"
+                            style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: #fef2f2; color: #dc2626;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem;"></i>
+                        </div>
+                        <h3>Shipment Not Found</h3>
+                        <p>We couldn't find a shipment with tracking ID: <strong>
+                                <%= trackingId %>
+                            </strong>. Please check the ID and try again.</p>
+                    </div>
+                    <% } %>
         </div>
     </section>
+
     <%- include('partials/footer') %>

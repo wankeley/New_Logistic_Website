@@ -1,39 +1,80 @@
 <%- include('partials/header') %>
-    <section style="padding: 4rem 0;">
-        <div class="container">
-            <div
-                style="max-width: 400px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow);">
-                <div class="section-title">
-                    <h2>Register</h2>
-                    <p>Create a new account</p>
+
+    <div class="auth-layout">
+        <div class="form-card animate-fade-in">
+            <div class="text-center mb-2">
+                <div class="icon-box" style="width: 80px; height: 80px; margin: 0 auto 1.5rem; font-size: 2rem;">
+                    <i class="fas fa-user-plus"></i>
                 </div>
-
-                <% if (typeof error !=='undefined' && error) { %>
-                    <div
-                        style="background: #fee2e2; color: #ef4444; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center;">
-                        <%= error %>
-                    </div>
-                    <% } %>
-
-                        <form action="/register" method="POST">
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" name="username" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" name="confirm_password" class="form-control" required>
-                            </div>
-                            <button type="submit" class="btn" style="width: 100%">Register</button>
-                        </form>
-                        <p style="text-align: center; margin-top: 1rem;">
-                            Already have an account? <a href="/login" style="color: var(--primary-color);">Login</a>
-                        </p>
+                <h2>Create Account</h2>
+                <p style="color: var(--text-light);">Join us to track your shipments</p>
             </div>
+
+            <% if (typeof error !=='undefined' && error) { %>
+                <div class="alert-danger mb-2"
+                    style="background: #fef2f2; color: #dc2626; padding: 1rem; border-radius: var(--border-radius-sm); border: 1px solid #fecaca; text-align: center;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <%= error %>
+                </div>
+                <% } %>
+
+                    <form action="/register" method="POST">
+                        <div class="form-group">
+                            <label for="username"><i class="fas fa-user"
+                                    style="margin-right: 8px; color: var(--text-light);"></i>Username</label>
+                            <input type="text" id="username" name="username" class="form-control" required
+                                placeholder="Choose a username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password"><i class="fas fa-lock"
+                                    style="margin-right: 8px; color: var(--text-light);"></i>Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required
+                                placeholder="Create a password">
+                            <i class="fas fa-eye password-toggle" id="togglePassword"
+                                style="position: absolute; right: 15px; top: 42px; cursor: pointer; color: var(--text-light);"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password"><i class="fas fa-lock"
+                                    style="margin-right: 8px; color: var(--text-light);"></i>Confirm Password</label>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                                required placeholder="Confirm your password">
+                            <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"
+                                style="position: absolute; right: 15px; top: 42px; cursor: pointer; color: var(--text-light);"></i>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mb-1" style="padding: 1rem;">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+
+                        <div class="text-center" style="margin-top: 1.5rem;">
+                            <p style="margin: 0;">Already have an account? <a href="/login"
+                                    style="color: var(--primary-color); font-weight: 600;">Sign In</a></p>
+                        </div>
+                    </form>
         </div>
-    </section>
+    </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPassword = document.getElementById('confirm_password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        toggleConfirmPassword.addEventListener('click', function () {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
     <%- include('partials/footer') %>

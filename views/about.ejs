@@ -1,58 +1,102 @@
 <%- include('partials/header') %>
-    <section class="hero"
-        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?team,office');">
+
+    <!-- Page Hero -->
+    <section class="hero" style="padding: 6rem 0;">
+        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1600&q=80" alt="About Us"
+            class="hero-bg">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1>About Us</h1>
-            <p>Connecting people and businesses through reliable logistics.</p>
+            <div class="hero-content text-center" style="max-width: 100%;">
+                <h1 class="text-white">About Us</h1>
+                <p style="max-width: 600px; margin: 0 auto;">Your trusted logistics partner in Ghana and beyond since
+                    2010.</p>
+            </div>
         </div>
     </section>
 
-    <section>
+    <!-- About Content -->
+    <section class="section-padding">
         <div class="container">
-            <div class="about-preview">
-                <div class="about-text">
-                    <div class="section-title" style="text-align:left;">
-                        <span>Our Story</span>
-                        <h2>Leading Logistics in West Africa</h2>
+            <div class="grid-2" style="align-items: center; gap: 4rem;">
+                <div>
+                    <p class="text-primary"
+                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
+                        Our Story</p>
+                    <h2>Connecting Ghana to the World</h2>
+                    <p>Founded in 2010, we have grown from a small freight forwarding startup to one of Ghana's most
+                        trusted logistics providers. Our mission is to simplify international trade for businesses of
+                        all sizes.</p>
+                    <p>With strategic partnerships across Europe, Asia, and the Americas, we provide seamless end-to-end
+                        logistics solutions. Our team of experienced professionals ensures your cargo is handled with
+                        care at every step.</p>
+                    <div class="flex" style="gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.25rem;">15+</h3>
+                            <p style="margin: 0; font-size: 0.9rem;">Years Experience</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.25rem;">50K+</h3>
+                            <p style="margin: 0; font-size: 0.9rem;">Shipments</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.25rem;">120+</h3>
+                            <p style="margin: 0; font-size: 0.9rem;">Partners</p>
+                        </div>
                     </div>
-                    <p>Founded with a vision to simplify global trade for businesses in Ghana, <%= settings.site_name
-                            || 'LogisticCo' %> has grown into a premier logistics provider. We understand the unique
-                            challenges of the region and offer tailored solutions that ensure your goods arrive safely
-                            and on time.</p>
-                    <p>Our mission is to empower businesses by providing seamless, transparent, and efficient supply
-                        chain solutions. Whether you are a small startup or a large corporation, we treat every shipment
-                        with the utmost care.</p>
                 </div>
-                <div class="about-img">
-                    <img src="https://source.unsplash.com/800x600/?meeting,business" alt="Team">
+                <div style="border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-lg);">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80" alt="Our Team"
+                        style="width: 100%; height: 450px; object-fit: cover;">
                 </div>
             </div>
         </div>
     </section>
 
-    <section style="background-color: var(--card-bg);">
+    <!-- Values -->
+    <section class="section-padding" style="background: #f1f5f9;">
         <div class="container">
-            <div class="section-title">
-                <span>Our Values</span>
+            <div class="text-center mb-4">
+                <p class="text-primary"
+                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">Our
+                    Values</p>
                 <h2>What Drives Us</h2>
             </div>
             <div class="grid-3">
-                <div class="service-card">
-                    <i class="fas fa-shield-alt service-icon"></i>
+                <div class="card text-center">
+                    <div class="icon-box" style="margin: 0 auto 1.5rem;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>Reliability</h3>
-                    <p>We deliver on our promises, every time.</p>
+                    <p>We deliver on our promises. Every shipment is tracked and managed to ensure safe, on-time
+                        delivery.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-clock service-icon"></i>
-                    <h3>Speed</h3>
-                    <p>Optimized routes for the fastest delivery times.</p>
+                <div class="card text-center">
+                    <div class="icon-box" style="margin: 0 auto 1.5rem;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Integrity</h3>
+                    <p>Transparent pricing, honest communication, and ethical business practices are at our core.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-users service-icon"></i>
-                    <h3>Customer First</h3>
-                    <p>Dedicated support team available 24/7.</p>
+                <div class="card text-center">
+                    <div class="icon-box" style="margin: 0 auto 1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We continuously improve our services with the latest technology and industry best practices.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- CTA -->
+    <section style="background: var(--gradient-primary); padding: 5rem 0;">
+        <div class="container text-center">
+            <h2 class="text-white">Ready to Partner with Us?</h2>
+            <p style="color: rgba(255,255,255,0.9); max-width: 500px; margin: 0 auto 2rem;">Let's discuss how we can
+                help your business grow with reliable logistics solutions.</p>
+            <a href="/contact" class="btn" style="background: white; color: var(--primary-color);"><i
+                    class="fas fa-envelope"></i> Contact Us</a>
+        </div>
+    </section>
+
     <%- include('partials/footer') %>

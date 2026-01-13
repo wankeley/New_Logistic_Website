@@ -1,25 +1,131 @@
 <%- include('partials/header') %>
-    <section class="hero"
-        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?logistics,truck');">
+
+    <!-- Page Hero -->
+    <section class="hero" style="padding: 6rem 0;">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80" alt="Services"
+            class="hero-bg">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1>Our Services</h1>
-            <p>Comprehensive logistics solutions designed for your business needs.</p>
+            <div class="hero-content text-center" style="max-width: 100%;">
+                <h1 class="text-white">Our Services</h1>
+                <p style="max-width: 600px; margin: 0 auto;">Comprehensive logistics solutions tailored to your business
+                    needs. From air to sea, we've got you covered.</p>
+            </div>
         </div>
     </section>
 
-    <section>
+    <!-- Services Grid -->
+    <section class="section-padding">
         <div class="container">
-            <div class="grid-3">
-                <% if (services && services.length> 0) { %>
+            <div class="grid-2" style="gap: 3rem;">
+                <!-- Air Freight -->
+                <div class="card hover-card" style="display: flex; gap: 2rem; align-items: flex-start;">
+                    <div class="icon-box" style="flex-shrink: 0;">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div>
+                        <h3>Air Freight</h3>
+                        <p>Express air cargo services for time-critical shipments. Our extensive network of airline
+                            partners ensures your goods reach their destination quickly and safely.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> Express delivery
+                                options</li>
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> Door-to-door service
+                            </li>
+                            <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                Real-time tracking</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sea Freight -->
+                <div class="card hover-card" style="display: flex; gap: 2rem; align-items: flex-start;">
+                    <div class="icon-box" style="flex-shrink: 0;">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div>
+                        <h3>Sea Freight</h3>
+                        <p>Cost-effective ocean freight solutions for bulk cargo and containers. Direct routes to major
+                            ports in Ghana, Europe, Asia, and the Americas.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> FCL & LCL shipping</li>
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> Port-to-port delivery
+                            </li>
+                            <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                Customs clearance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Road Transport -->
+                <div class="card hover-card" style="display: flex; gap: 2rem; align-items: flex-start;">
+                    <div class="icon-box" style="flex-shrink: 0;">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div>
+                        <h3>Road Transport</h3>
+                        <p>Efficient trucking services covering Ghana and West Africa. Our modern fleet ensures safe and
+                            timely delivery of your goods.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> Cross-border transport
+                            </li>
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> GPS-tracked vehicles
+                            </li>
+                            <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                Flexible scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Warehousing -->
+                <div class="card hover-card" style="display: flex; gap: 2rem; align-items: flex-start;">
+                    <div class="icon-box" style="flex-shrink: 0;">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div>
+                        <h3>Warehousing</h3>
+                        <p>Secure storage facilities strategically located for optimal distribution. Climate-controlled
+                            options available for sensitive goods.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> 24/7 security</li>
+                            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                    style="color: var(--primary-color); margin-right: 8px;"></i> Inventory management
+                            </li>
+                            <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                Pick & pack services</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Services from Admin -->
+    <% if (typeof services !=='undefined' && services && services.length> 0) { %>
+        <section class="section-padding" style="background: #f1f5f9;">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <p class="text-primary"
+                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
+                        Additional Services</p>
+                    <h2>Custom Solutions</h2>
+                </div>
+                <div class="grid-3">
                     <% services.forEach(service=> { %>
-                        <div class="service-card">
+                        <div class="card hover-card text-center">
                             <% if(service.image) { %>
                                 <img src="<%= service.image %>" alt="<%= service.title %>"
-                                    style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+                                    style="width:100%; height:180px; object-fit:cover; border-radius: var(--border-radius-sm); margin-bottom:1.5rem;">
                                 <% } else { %>
-                                    <div
-                                        style="width:100%; height:200px; background:#f1f5f9; border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center;">
-                                        <i class="fas fa-box fa-3x" style="color:#cbd5e1"></i>
+                                    <div class="icon-box" style="margin: 0 auto 1.5rem;">
+                                        <i class="fas fa-box"></i>
                                     </div>
                                     <% } %>
                                         <h3>
@@ -30,40 +136,19 @@
                                         </p>
                         </div>
                         <% }); %>
-                            <% } else { %>
-                                <div class="service-card">
-                                    <i class="fas fa-plane service-icon"></i>
-                                    <h3>Air Freight</h3>
-                                    <p>Express delivery for urgent shipments worldwide.</p>
-                                </div>
-                                <div class="service-card">
-                                    <i class="fas fa-ship service-icon"></i>
-                                    <h3>Ocean Freight</h3>
-                                    <p>FCL and LCL shipping solutions for reduced costs.</p>
-                                </div>
-                                <div class="service-card">
-                                    <i class="fas fa-truck service-icon"></i>
-                                    <h3>Road Transport</h3>
-                                    <p>Reliable trucking across Ghana and West Africa.</p>
-                                </div>
-                                <div class="service-card">
-                                    <i class="fas fa-warehouse service-icon"></i>
-                                    <h3>Warehousing</h3>
-                                    <p>Secure storage facilities with inventory management.</p>
-                                </div>
-                                <div class="service-card">
-                                    <i class="fas fa-globe-africa service-icon"></i>
-                                    <h3>Shipping to/from Ghana</h3>
-                                    <p>Specialized services for goods moving in and out of Ghana ports (Tema, Takoradi).
-                                    </p>
-                                </div>
-                                <div class="service-card">
-                                    <i class="fas fa-file-contract service-icon"></i>
-                                    <h3>Customs Clearance</h3>
-                                    <p>Hassle-free customs brokerage and documentation.</p>
-                                </div>
-                                <% } %>
+                </div>
             </div>
-        </div>
-    </section>
-    <%- include('partials/footer') %>
+        </section>
+        <% } %>
+
+            <!-- CTA -->
+            <section style="background: var(--gradient-dark); padding: 5rem 0;">
+                <div class="container text-center">
+                    <h2 class="text-white">Need a Custom Solution?</h2>
+                    <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 2rem;">Contact our team to discuss your
+                        specific logistics requirements.</p>
+                    <a href="/quote" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get a Quote</a>
+                </div>
+            </section>
+
+            <%- include('partials/footer') %>

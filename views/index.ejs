@@ -1,67 +1,115 @@
 <%- include('partials/header') %>
+
+    <!-- Hero Section -->
     <section class="hero">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&q=80" alt="Logistics"
+            class="hero-bg">
+        <div class="hero-overlay"></div>
         <div class="container">
-            <h1>Global Logistics Partner <br> for Your Business</h1>
-            <p>Reliable freight forwarding, warehousing, and cargo transport services tailored to your needs. Shipping
-                to and from Ghana made easy.</p>
-            <a href="/quote" class="btn">Request a Quote</a>
-            <a href="/services" class="btn btn-outline"
-                style="color:white; border-color:white; margin-left:1rem">Explore Services</a>
+            <div class="hero-content animate-fade-in">
+                <h1 class="text-white">Global Logistics <br>Solutions for Ghana</h1>
+                <p>Reliable freight forwarding, warehousing, and cargo transport services. Shipping to and from Ghana
+                    made seamless and efficient.</p>
+                <div class="flex" style="gap: 1rem; flex-wrap: wrap;">
+                    <a href="/quote" class="btn btn-primary"><i class="fas fa-file-invoice"></i> Request a Quote</a>
+                    <a href="/services" class="btn btn-outline"><i class="fas fa-arrow-right"></i> Explore Services</a>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Quick Tracking Widget -->
     <div class="container">
-        <div class="tracking-widget-home">
-            <form action="/tracking" method="GET" style="display:flex; width:100%; gap:1rem;">
-                <input type="text" name="id" placeholder="Enter Tracking ID (e.g., TRK-12345)" required>
-                <button type="submit" class="btn">Track</button>
+        <div class="tracking-widget">
+            <form action="/tracking" method="GET" style="display: flex; width: 100%; gap: 1rem; flex-wrap: wrap;">
+                <input type="text" name="id" class="form-control" placeholder="Enter your Tracking ID (e.g., TRK-12345)"
+                    required style="flex: 1; min-width: 250px;">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Track Shipment</button>
             </form>
         </div>
     </div>
 
-    <section>
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
-            <div class="section-title">
-                <span>Our Expertise</span>
-                <h2>Why Choose Us</h2>
-            </div>
-            <div class="grid-3">
-                <div class="service-card">
-                    <i class="fas fa-ship service-icon"></i>
-                    <h3>Sea Freight</h3>
-                    <p>Cost-effective ocean freight solutions for large volume cargo globally.</p>
+            <div class="grid-4 text-center">
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Years Experience</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-plane service-icon"></i>
-                    <h3>Air Freight</h3>
-                    <p>Fast and reliable air cargo services for time-sensitive shipments.</p>
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>Shipments Delivered</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-truck moving service-icon"></i>
-                    <h3>Land Transport</h3>
-                    <p>Efficient road network covering Ghana and West Africa.</p>
+                <div class="stat-item">
+                    <h3>120+</h3>
+                    <p>Global Partners</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Customer Support</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Why Choose Us -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-4">
+                <p class="text-primary"
+                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">Our
+                    Expertise</p>
+                <h2>Why Choose Us</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card hover-card">
+                    <div class="icon-box">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Sea Freight</h3>
+                    <p>Cost-effective ocean freight solutions for large volume cargo. Direct routes to major ports
+                        worldwide.</p>
+                </div>
+                <div class="card hover-card">
+                    <div class="icon-box">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Air Freight</h3>
+                    <p>Fast and reliable air cargo services for time-sensitive shipments. Express delivery options
+                        available.</p>
+                </div>
+                <div class="card hover-card">
+                    <div class="icon-box">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Land Transport</h3>
+                    <p>Efficient road network covering Ghana and West Africa. Door-to-door delivery services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Services from CMS -->
     <% if (services && services.length> 0) { %>
-        <section style="background-color: white;">
+        <section class="section-padding" style="background: #f1f5f9;">
             <div class="container">
-                <div class="section-title">
-                    <span>What We Do</span>
+                <div class="text-center mb-4">
+                    <p class="text-primary"
+                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
+                        What We Do</p>
                     <h2>Our Core Services</h2>
                 </div>
                 <div class="grid-3">
                     <% services.forEach(service=> { %>
-                        <div class="service-card">
+                        <div class="card hover-card">
                             <% if(service.image) { %>
                                 <img src="<%= service.image %>" alt="<%= service.title %>"
-                                    style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+                                    style="width:100%; height:200px; object-fit:cover; border-radius: var(--border-radius-sm); margin-bottom:1.5rem;">
                                 <% } else { %>
                                     <div
-                                        style="width:100%; height:200px; background:#f1f5f9; border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center;">
-                                        <i class="fas fa-box fa-3x" style="color:#cbd5e1"></i>
+                                        style="width:100%; height:200px; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: var(--border-radius-sm); margin-bottom:1.5rem; display:flex; align-items:center; justify-content:center;">
+                                        <i class="fas fa-box fa-3x" style="color: var(--primary-color);"></i>
                                     </div>
                                     <% } %>
                                         <h3>
@@ -73,41 +121,68 @@
                         </div>
                         <% }); %>
                 </div>
-                <div class="text-center" style="margin-top:2rem;">
-                    <a href="/services" class="btn btn-outline">View All Services</a>
+                <div class="text-center" style="margin-top: 3rem;">
+                    <a href="/services" class="btn btn-secondary"><i class="fas fa-th-large"></i> View All Services</a>
                 </div>
             </div>
         </section>
         <% } %>
 
-            <section>
+            <!-- About Preview -->
+            <section class="section-padding">
                 <div class="container">
-                    <div class="about-preview">
-                        <div class="about-img">
-                            <img src="https://source.unsplash.com/800x600/?warehouse,worker" alt="Warehouse">
+                    <div class="grid-2" style="align-items: center; gap: 4rem;">
+                        <div
+                            style="border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-lg);">
+                            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80"
+                                alt="Warehouse Operations" style="width: 100%; height: 400px; object-fit: cover;">
                         </div>
-                        <div class="about-text">
-                            <div class="section-title" style="text-align:left; margin-bottom:1rem;">
-                                <span>About Us</span>
-                                <h2>Committed to Deliver Excellence</h2>
-                            </div>
+                        <div>
+                            <p class="text-primary"
+                                style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
+                                About Us</p>
+                            <h2>Committed to Deliver Excellence</h2>
                             <p>With years of experience in the logistics industry, we have established ourselves as a
                                 trusted partner for businesses in Ghana and beyond. Our extensive network ensures your
                                 cargo reaches its destination safely and on time.</p>
-                            <ul style="margin-bottom:2rem; margin-top:1rem;">
-                                <li style="margin-bottom:0.5rem;"><i class="fas fa-check-circle"
-                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Real-time Tracking
+                            <ul style="margin-bottom: 2rem;">
+                                <li style="margin-bottom: 0.75rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check-circle"
+                                        style="color: var(--primary-color); margin-right: 12px; font-size: 1.25rem;"></i>
+                                    <span>Real-time Shipment Tracking</span>
                                 </li>
-                                <li style="margin-bottom:0.5rem;"><i class="fas fa-check-circle"
-                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Secure Warehousing
+                                <li style="margin-bottom: 0.75rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check-circle"
+                                        style="color: var(--primary-color); margin-right: 12px; font-size: 1.25rem;"></i>
+                                    <span>Secure Warehousing Facilities</span>
                                 </li>
-                                <li><i class="fas fa-check-circle"
-                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Customs Clearance
-                                    Handling</li>
+                                <li style="margin-bottom: 0.75rem; display: flex; align-items: center;">
+                                    <i class="fas fa-check-circle"
+                                        style="color: var(--primary-color); margin-right: 12px; font-size: 1.25rem;"></i>
+                                    <span>Customs Clearance Handling</span>
+                                </li>
+                                <li style="display: flex; align-items: center;">
+                                    <i class="fas fa-check-circle"
+                                        style="color: var(--primary-color); margin-right: 12px; font-size: 1.25rem;"></i>
+                                    <span>24/7 Customer Support</span>
+                                </li>
                             </ul>
-                            <a href="/about" class="btn">Read More</a>
+                            <a href="/about" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Learn More</a>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <!-- CTA Section -->
+            <section style="background: var(--gradient-primary); padding: 5rem 0;">
+                <div class="container text-center">
+                    <h2 class="text-white" style="margin-bottom: 1rem;">Ready to Ship?</h2>
+                    <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 2rem;">Get a customized
+                        quote for your shipping needs. Our team is ready to help you find the best logistics solution.
+                    </p>
+                    <a href="/quote" class="btn" style="background: white; color: var(--primary-color);"><i
+                            class="fas fa-paper-plane"></i> Get Free Quote</a>
+                </div>
+            </section>
+
             <%- include('partials/footer') %>
