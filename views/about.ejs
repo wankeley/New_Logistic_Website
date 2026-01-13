@@ -1,0 +1,57 @@
+<%- include('layout', { body: ` <section class="hero"
+    style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?team,office');">
+    <div class="container">
+        <h1>About Us</h1>
+        <p>Connecting people and businesses through reliable logistics.</p>
+    </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="about-preview">
+                <div class="about-text">
+                    <div class="section-title" style="text-align:left;">
+                        <span>Our Story</span>
+                        <h2>Leading Logistics in West Africa</h2>
+                    </div>
+                    <p>Founded with a vision to simplify global trade for businesses in Ghana, <%= settings.site_name
+                            || 'LogisticCo' %> has grown into a premier logistics provider. We understand the unique
+                            challenges of the region and offer tailored solutions that ensure your goods arrive safely
+                            and on time.</p>
+                    <p>Our mission is to empower businesses by providing seamless, transparent, and efficient supply
+                        chain solutions. Whether you are a small startup or a large corporation, we treat every shipment
+                        with the utmost care.</p>
+                </div>
+                <div class="about-img">
+                    <img src="https://source.unsplash.com/800x600/?meeting,business" alt="Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--card-bg);">
+        <div class="container">
+            <div class="section-title">
+                <span>Our Values</span>
+                <h2>What Drives Us</h2>
+            </div>
+            <div class="grid-3">
+                <div class="service-card">
+                    <i class="fas fa-shield-alt service-icon"></i>
+                    <h3>Reliability</h3>
+                    <p>We deliver on our promises, every time.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clock service-icon"></i>
+                    <h3>Speed</h3>
+                    <p>Optimized routes for the fastest delivery times.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-users service-icon"></i>
+                    <h3>Customer First</h3>
+                    <p>Dedicated support team available 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    `}) %>

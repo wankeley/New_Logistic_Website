@@ -1,0 +1,112 @@
+<%- include('layout', { body: ` <section class="hero">
+    <div class="container">
+        <h1>Global Logistics Partner <br> for Your Business</h1>
+        <p>Reliable freight forwarding, warehousing, and cargo transport services tailored to your needs. Shipping to
+            and from Ghana made easy.</p>
+        <a href="/quote" class="btn">Request a Quote</a>
+        <a href="/services" class="btn btn-outline" style="color:white; border-color:white; margin-left:1rem">Explore
+            Services</a>
+    </div>
+    </section>
+
+    <div class="container">
+        <div class="tracking-widget-home">
+            <form action="/tracking" method="GET" style="display:flex; width:100%; gap:1rem;">
+                <input type="text" name="id" placeholder="Enter Tracking ID (e.g., TRK-12345)" required>
+                <button type="submit" class="btn">Track</button>
+            </form>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <span>Our Expertise</span>
+                <h2>Why Choose Us</h2>
+            </div>
+            <div class="grid-3">
+                <div class="service-card">
+                    <i class="fas fa-ship service-icon"></i>
+                    <h3>Sea Freight</h3>
+                    <p>Cost-effective ocean freight solutions for large volume cargo globally.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-plane service-icon"></i>
+                    <h3>Air Freight</h3>
+                    <p>Fast and reliable air cargo services for time-sensitive shipments.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-truck moving service-icon"></i>
+                    <h3>Land Transport</h3>
+                    <p>Efficient road network covering Ghana and West Africa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% if (services && services.length> 0) { %>
+        <section style="background-color: white;">
+            <div class="container">
+                <div class="section-title">
+                    <span>What We Do</span>
+                    <h2>Our Core Services</h2>
+                </div>
+                <div class="grid-3">
+                    <% services.forEach(service=> { %>
+                        <div class="service-card">
+                            <% if(service.image) { %>
+                                <img src="<%= service.image %>" alt="<%= service.title %>"
+                                    style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+                                <% } else { %>
+                                    <div
+                                        style="width:100%; height:200px; background:#f1f5f9; border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center;">
+                                        <i class="fas fa-box fa-3x" style="color:#cbd5e1"></i>
+                                    </div>
+                                    <% } %>
+                                        <h3>
+                                            <%= service.title %>
+                                        </h3>
+                                        <p>
+                                            <%= service.description %>
+                                        </p>
+                        </div>
+                        <% }); %>
+                </div>
+                <div class="text-center" style="margin-top:2rem;">
+                    <a href="/services" class="btn btn-outline">View All Services</a>
+                </div>
+            </div>
+        </section>
+        <% } %>
+
+            <section>
+                <div class="container">
+                    <div class="about-preview">
+                        <div class="about-img">
+                            <img src="https://source.unsplash.com/800x600/?warehouse,worker" alt="Warehouse">
+                        </div>
+                        <div class="about-text">
+                            <div class="section-title" style="text-align:left; margin-bottom:1rem;">
+                                <span>About Us</span>
+                                <h2>Committed to Deliver Excellence</h2>
+                            </div>
+                            <p>With years of experience in the logistics industry, we have established ourselves as a
+                                trusted partner for businesses in Ghana and beyond. Our extensive network ensures your
+                                cargo reaches its destination safely and on time.</p>
+                            <ul style="margin-bottom:2rem; margin-top:1rem;">
+                                <li style="margin-bottom:0.5rem;"><i class="fas fa-check-circle"
+                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Real-time Tracking
+                                </li>
+                                <li style="margin-bottom:0.5rem;"><i class="fas fa-check-circle"
+                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Secure Warehousing
+                                </li>
+                                <li><i class="fas fa-check-circle"
+                                        style="color:var(--primary-color); margin-right:0.5rem;"></i> Customs Clearance
+                                    Handling</li>
+                            </ul>
+                            <a href="/about" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            `}) %>

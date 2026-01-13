@@ -1,0 +1,129 @@
+<%- include('../layout', { body: ` <section style="padding: 2rem 0;">
+    <div class="container">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+            <h1>Manage Shipments</h1>
+            <a href="/admin/dashboard" class="btn btn-outline">Back to Dashboard</a>
+        </div>
+
+        <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow); margin-bottom:2rem;">
+            <h3>Create New Shipment</h3>
+            <form action="/admin/shipments/add" method="POST" style="margin-top:1rem;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Tracking Number</label>
+                        <input type="text" name="tracking_number" class="form-control"
+                            placeholder="e.g. TRK-<%= Math.floor(Math.random() * 100000) %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                            <option>Pending</option>
+                            <option>Picked Up</option>
+                            <option>In Transit</option>
+                            <option>Out for Delivery</option>
+                            <option>Delivered</option>
+                            <option>Held</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Sender Name</label>
+                        <input type="text" name="sender_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Receiver Name</label>
+                        <input type="text" name="receiver_name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Origin</label>
+                        <input type="text" name="origin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Destination</label>
+                        <input type="text" name="destination" class="form-control" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Current Location</label>
+                        <input type="text" name="current_location" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Estimated Delivery</label>
+                        <input type="text" name="estimated_delivery" class="form-control" placeholder="e.g. 5 Days"
+                            required>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Create Shipment</button>
+            </form>
+        </div>
+
+        <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow);">
+            <h3>Existing Shipments</h3>
+            <div style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem; min-width:800px;">
+                    <thead>
+                        <tr style="text-align:left; border-bottom:2px solid #e2e8f0;">
+                            <th style="padding:1rem;">Tracking ID</th>
+                            <th style="padding:1rem;">Origin/Dest</th>
+                            <th style="padding:1rem;">Status</th>
+                            <th style="padding:1rem;">Location</th>
+                            <th style="padding:1rem;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(shipments && shipments.length> 0) { %>
+                            <% shipments.forEach(ship=> { %>
+                                <tr style="border-bottom:1px solid #f1f5f9;">
+                                    <td style="padding:1rem; font-weight:600;">
+                                        <%= ship.tracking_number %>
+                                    </td>
+                                    <td style="padding:1rem;">
+                                        <%= ship.origin %> &rarr; <%= ship.destination %>
+                                                <br>
+                                                <small style="color:#64748b">
+                                                    <%= ship.sender_name %> to <%= ship.receiver_name %>
+                                                </small>
+                                    </td>
+                                    <td style="padding:1rem;">
+                                        <span style="font-weight:600; color:var(--primary-color)">
+                                            <%= ship.status %>
+                                        </span>
+                                    </td>
+                                    <td style="padding:1rem;">
+                                        <%= ship.current_location %>
+                                    </td>
+                                    <td style="padding:1rem;">
+                                        <form action="/admin/shipments/update/<%= ship.id %>" method="POST"
+                                            style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                                            <input type="text" name="current_location" class="form-control"
+                                                style="width:150px; padding:8px;" placeholder="New Location" required>
+                                            <select name="status" class="form-control"
+                                                style="width:100px; padding:8px;">
+                                                <option <%=ship.status==='Pending' ? 'selected' : '' %>>Pending</option>
+                                                <option <%=ship.status==='In Transit' ? 'selected' : '' %>>In Transit
+                                                </option>
+                                                <option <%=ship.status==='Delivered' ? 'selected' : '' %>>Delivered
+                                                </option>
+                                            </select>
+                                            <button type="submit" class="btn"
+                                                style="padding:8px 12px; font-size:0.8rem;">Update</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="5" style="padding:1rem;">No shipments found.</td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </section>
+    `}) %>
