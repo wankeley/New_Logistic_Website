@@ -1,52 +1,467 @@
-<%- include('../partials/header') %>
-    <section style="padding: 2rem 0;">
-        <div class="container">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-                <h1>Manage Services</h1>
-                <a href="/admin/dashboard" class="btn btn-outline">Back to Dashboard</a>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
 
-            <div
-                style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow); margin-bottom:2rem;">
-                <h3>Add New Service</h3>
-                <form action="/admin/services/add" method="POST" style="margin-top:1rem;">
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Image URL (Optional)</label>
-                            <input type="text" name="image" class="form-control" placeholder="https://...">
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Services | <%= settings.site_name || 'LogisticCo' %>
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --admin-bg: #0f172a;
+            --admin-accent: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f1f5f9;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-bg);
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            padding: 0 1.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .sidebar-logo i {
+            width: 40px;
+            height: 40px;
+            background: var(--admin-accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            color: #64748b;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--admin-accent);
+            color: white;
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--admin-accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.125rem;
+        }
+
+        .user-info span {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .admin-main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+            font-size: 1.75rem;
+            color: #0f172a;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #f8fafc;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--admin-accent);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--admin-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.2s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .service-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .delete-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: #fef2f2;
+            color: #dc2626;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 1024px) {
+            .admin-sidebar {
+                width: 80px;
+                padding: 1rem 0;
+            }
+
+            .sidebar-logo span,
+            .nav-section-title,
+            .nav-link span,
+            .user-info {
+                display: none;
+            }
+
+            .sidebar-logo a {
+                justify-content: center;
+            }
+
+            .nav-link {
+                justify-content: center;
+                padding: 1rem;
+            }
+
+            .user-card {
+                justify-content: center;
+            }
+
+            .admin-main {
+                margin-left: 80px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <a href="/admin/dashboard"><i class="fas fa-cube"></i><span>
+                    <%= settings.site_name || 'LogisticCo' %>
+                </span></a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Main</div>
+                <a href="/admin/dashboard" class="nav-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="/admin/shipments" class="nav-link"><i class="fas fa-boxes"></i><span>Shipments</span></a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Manage</div>
+                <a href="/admin/services" class="nav-link active"><i
+                        class="fas fa-concierge-bell"></i><span>Services</span></a>
+                <a href="/admin/settings" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Account</div>
+                <a href="/" class="nav-link"><i class="fas fa-globe"></i><span>View Site</span></a>
+                <a href="/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-card">
+                <div class="user-avatar">
+                    <%= user.username.charAt(0).toUpperCase() %>
+                </div>
+                <div class="user-info">
+                    <h4>
+                        <%= user.username %>
+                    </h4><span>Administrator</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-header">
+            <div>
+                <h1><i class="fas fa-concierge-bell" style="margin-right: 0.5rem; color: var(--admin-accent);"></i>
+                    Manage Services</h1>
+            </div>
+        </div>
+
+        <!-- Add Service Form -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-plus-circle" style="margin-right: 8px; color: var(--admin-accent);"></i>Add New
+                    Service</h3>
+            </div>
+            <form action="/admin/services/add" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Service Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g. Express Delivery"
+                            required>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" class="form-control" rows="3" required></textarea>
+                        <label>Image URL (Optional)</label>
+                        <input type="text" name="image" class="form-control"
+                            placeholder="https://example.com/image.jpg">
                     </div>
-                    <button type="submit" class="btn">Add Service</button>
-                </form>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" placeholder="Describe the service..."
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Service</button>
+            </form>
+        </div>
 
-            <div class="grid-3">
-                <% if(services && services.length> 0) { %>
-                    <% services.forEach(service=> { %>
-                        <div class="service-card" style="text-align:left; position:relative;">
-                            <a href="/admin/services/delete/<%= service.id %>" onclick="return confirm('Are you sure?')"
-                                style="position:absolute; top:1rem; right:1rem; color:#ef4444;"><i
-                                    class="fas fa-trash"></i></a>
+        <!-- Services Grid -->
+        <% if (services && services.length> 0) { %>
+            <div class="services-grid">
+                <% services.forEach(service=> { %>
+                    <div class="service-card">
+                        <div class="service-card-header">
                             <h3>
                                 <%= service.title %>
                             </h3>
-                            <p>
-                                <%= service.description %>
-                            </p>
+                            <a href="/admin/services/delete/<%= service.id %>"
+                                onclick="return confirm('Delete this service?')" class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </div>
-                        <% }); %>
-                            <% } else { %>
-                                <p>No services added yet.</p>
-                                <% } %>
+                        <p>
+                            <%= service.description %>
+                        </p>
+                    </div>
+                    <% }); %>
             </div>
-        </div>
-    </section>
-    <%- include('../partials/footer') %>
+            <% } else { %>
+                <div class="empty-state">
+                    <i class="fas fa-concierge-bell"></i>
+                    <p>No services added yet. Add your first service above.</p>
+                </div>
+                <% } %>
+    </main>
+</body>
+
+</html>
