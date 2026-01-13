@@ -1,9 +1,10 @@
-<%- include('layout', { body: ` <section class="hero"
-    style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?logistics,truck');">
-    <div class="container">
-        <h1>Our Services</h1>
-        <p>Comprehensive logistics solutions designed for your business needs.</p>
-    </div>
+<%- include('partials/header') %>
+    <section class="hero"
+        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?logistics,truck');">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Comprehensive logistics solutions designed for your business needs.</p>
+        </div>
     </section>
 
     <section>
@@ -65,4 +66,4 @@
             </div>
         </div>
     </section>
-    `}) %>
+    <%- include('partials/footer') %>

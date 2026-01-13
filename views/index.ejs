@@ -1,12 +1,13 @@
-<%- include('layout', { body: ` <section class="hero">
-    <div class="container">
-        <h1>Global Logistics Partner <br> for Your Business</h1>
-        <p>Reliable freight forwarding, warehousing, and cargo transport services tailored to your needs. Shipping to
-            and from Ghana made easy.</p>
-        <a href="/quote" class="btn">Request a Quote</a>
-        <a href="/services" class="btn btn-outline" style="color:white; border-color:white; margin-left:1rem">Explore
-            Services</a>
-    </div>
+<%- include('partials/header') %>
+    <section class="hero">
+        <div class="container">
+            <h1>Global Logistics Partner <br> for Your Business</h1>
+            <p>Reliable freight forwarding, warehousing, and cargo transport services tailored to your needs. Shipping
+                to and from Ghana made easy.</p>
+            <a href="/quote" class="btn">Request a Quote</a>
+            <a href="/services" class="btn btn-outline"
+                style="color:white; border-color:white; margin-left:1rem">Explore Services</a>
+        </div>
     </section>
 
     <div class="container">
@@ -109,4 +110,4 @@
                     </div>
                 </div>
             </section>
-            `}) %>
+            <%- include('partials/footer') %>

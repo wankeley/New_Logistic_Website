@@ -1,9 +1,10 @@
-<%- include('layout', { body: ` <section class="hero"
-    style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?team,office');">
-    <div class="container">
-        <h1>About Us</h1>
-        <p>Connecting people and businesses through reliable logistics.</p>
-    </div>
+<%- include('partials/header') %>
+    <section class="hero"
+        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?team,office');">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>Connecting people and businesses through reliable logistics.</p>
+        </div>
     </section>
 
     <section>
@@ -54,4 +55,4 @@
             </div>
         </div>
     </section>
-    `}) %>
+    <%- include('partials/footer') %>

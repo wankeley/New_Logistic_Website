@@ -1,9 +1,10 @@
-<%- include('layout', { body: ` <section class="hero"
-    style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?technology,logistics');">
-    <div class="container">
-        <h1>Track Your Shipment</h1>
-        <p>Real-time updates on your cargo's location and status.</p>
-    </div>
+<%- include('partials/header') %>
+    <section class="hero"
+        style="padding: 4rem 0; min-height: 40vh; background-image: url('https://source.unsplash.com/1600x900/?technology,logistics');">
+        <div class="container">
+            <h1>Track Your Shipment</h1>
+            <p>Real-time updates on your cargo's location and status.</p>
+        </div>
     </section>
 
     <section>
@@ -89,4 +90,4 @@
                         <% } %>
         </div>
     </section>
-    `}) %>
+    <%- include('partials/footer') %>

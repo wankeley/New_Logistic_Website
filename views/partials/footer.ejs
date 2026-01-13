@@ -1,0 +1,40 @@
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>
+                    <%= settings.site_name || 'LogisticCo' %>
+                </h4>
+                <p>Moving your business forward with reliable application transport solutions.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="/services">Services</a>
+                <a href="/tracking">Tracking</a>
+                <a href="/about">About Us</a>
+                <a href="/admin/login">Admin Login</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i>
+                    <%= settings.address || 'Accra, Ghana' %>
+                </p>
+                <p><i class="fas fa-phone"></i>
+                    <%= settings.contact_phone || '+233 20 000 0000' %>
+                </p>
+                <p><i class="fas fa-envelope"></i>
+                    <%= settings.contact_email || 'info@logistics.com' %>
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <%= new Date().getFullYear() %>
+                <%= settings.site_name %>. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>

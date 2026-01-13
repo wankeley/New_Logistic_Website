@@ -1,79 +1,80 @@
-<%- include('../layout', { body: ` <section style="padding: 2rem 0;">
-    <div class="container">
-        <h1>Admin Dashboard</h1>
+<%- include('../partials/header') %>
+    <section style="padding: 2rem 0;">
+        <div class="container">
+            <h1>Admin Dashboard</h1>
 
-        <div class="grid-3 mb-2">
-            <a href="/admin/shipments" class="service-card"
-                style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
-                <i class="fas fa-boxes fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
-                <h3>Manage Shipments</h3>
-                <p>Create, update, and track cargo.</p>
-            </a>
-            <a href="/admin/services" class="service-card"
-                style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
-                <i class="fas fa-list fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
-                <h3>Manage Services</h3>
-                <p>Edit services and "What We Do".</p>
-            </a>
-            <a href="/admin/settings" class="service-card"
-                style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
-                <i class="fas fa-cog fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
-                <h3>Site Settings</h3>
-                <p>Change logos, colors, and contacts.</p>
-            </a>
-        </div>
-
-        <div class="grid-2">
-            <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow);">
-                <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:1rem; margin-bottom:1rem;">Recent Messages
-                </h3>
-                <% if(messages && messages.length> 0) { %>
-                    <ul style="display:flex; flex-direction:column; gap:1rem;">
-                        <% messages.forEach(msg=> { %>
-                            <li style="padding-bottom:1rem; border-bottom:1px solid #f1f5f9;">
-                                <strong>
-                                    <%= msg.subject %>
-                                </strong> <br>
-                                <small style="color:#64748b">
-                                    <%= msg.name %> (<%= msg.email %>)
-                                </small>
-                            </li>
-                            <% }); %>
-                    </ul>
-                    <% } else { %>
-                        <p>No new messages.</p>
-                        <% } %>
+            <div class="grid-3 mb-2">
+                <a href="/admin/shipments" class="service-card"
+                    style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
+                    <i class="fas fa-boxes fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
+                    <h3>Manage Shipments</h3>
+                    <p>Create, update, and track cargo.</p>
+                </a>
+                <a href="/admin/services" class="service-card"
+                    style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
+                    <i class="fas fa-list fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
+                    <h3>Manage Services</h3>
+                    <p>Edit services and "What We Do".</p>
+                </a>
+                <a href="/admin/settings" class="service-card"
+                    style="text-align:left; cursor:pointer; text-decoration:none; color:inherit;">
+                    <i class="fas fa-cog fa-2x" style="color:var(--primary-color); margin-bottom:1rem;"></i>
+                    <h3>Site Settings</h3>
+                    <p>Change logos, colors, and contacts.</p>
+                </a>
             </div>
 
-            <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow);">
-                <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:1rem; margin-bottom:1rem;">Recent Shipments
-                </h3>
-                <% if(shipments && shipments.length> 0) { %>
-                    <ul style="display:flex; flex-direction:column; gap:1rem;">
-                        <% shipments.forEach(ship=> { %>
-                            <li
-                                style="padding-bottom:1rem; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between;">
-                                <div>
+            <div class="grid-2">
+                <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow);">
+                    <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:1rem; margin-bottom:1rem;">Recent
+                        Messages</h3>
+                    <% if(messages && messages.length> 0) { %>
+                        <ul style="display:flex; flex-direction:column; gap:1rem;">
+                            <% messages.forEach(msg=> { %>
+                                <li style="padding-bottom:1rem; border-bottom:1px solid #f1f5f9;">
                                     <strong>
-                                        <%= ship.tracking_number %>
+                                        <%= msg.subject %>
                                     </strong> <br>
                                     <small style="color:#64748b">
-                                        <%= ship.origin %> &rarr; <%= ship.destination %>
+                                        <%= msg.name %> (<%= msg.email %>)
                                     </small>
-                                </div>
-                                <span style="font-weight:600; color:var(--primary-color)">
-                                    <%= ship.status %>
-                                </span>
-                            </li>
-                            <% }); %>
-                    </ul>
-                    <% } else { %>
-                        <p>No shipments found.</p>
-                        <% } %>
-                            <a href="/admin/shipments" class="btn btn-outline"
-                                style="margin-top:1rem; width:100%; text-align:center;">View All</a>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } else { %>
+                            <p>No new messages.</p>
+                            <% } %>
+                </div>
+
+                <div style="background:white; padding:2rem; border-radius:8px; box-shadow:var(--shadow);">
+                    <h3 style="border-bottom:1px solid #e2e8f0; padding-bottom:1rem; margin-bottom:1rem;">Recent
+                        Shipments</h3>
+                    <% if(shipments && shipments.length> 0) { %>
+                        <ul style="display:flex; flex-direction:column; gap:1rem;">
+                            <% shipments.forEach(ship=> { %>
+                                <li
+                                    style="padding-bottom:1rem; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between;">
+                                    <div>
+                                        <strong>
+                                            <%= ship.tracking_number %>
+                                        </strong> <br>
+                                        <small style="color:#64748b">
+                                            <%= ship.origin %> &rarr; <%= ship.destination %>
+                                        </small>
+                                    </div>
+                                    <span style="font-weight:600; color:var(--primary-color)">
+                                        <%= ship.status %>
+                                    </span>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } else { %>
+                            <p>No shipments found.</p>
+                            <% } %>
+                                <a href="/admin/shipments" class="btn btn-outline"
+                                    style="margin-top:1rem; width:100%; text-align:center;">View All</a>
+                </div>
             </div>
         </div>
-    </div>
     </section>
-    `}) %>
+    <%- include('../partials/footer') %>
