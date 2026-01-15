@@ -1,15 +1,14 @@
 <%- include('partials/header') %>
 
     <!-- Page Hero -->
-    <section class="hero" style="padding: 6rem 0;">
-        <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80" alt="Contact"
-            class="hero-bg">
-        <div class="hero-overlay"></div>
+    <section class="hero-modern" style="min-height: 400px;">
+        <div class="hero-gradient"></div>
         <div class="container">
-            <div class="hero-content text-center" style="max-width: 100%;">
-                <h1 class="text-white">Contact Us</h1>
-                <p style="max-width: 600px; margin: 0 auto;">Have questions? We're here to help. Reach out to our team
-                    today.</p>
+            <div class="hero-modern-content" style="text-align: center;">
+                <div class="hero-text" style="max-width: 700px; margin: 0 auto;">
+                    <h1 style="margin-bottom: 1rem;">Contact Us</h1>
+                    <p style="font-size: 1.1rem; margin-bottom: 3rem; color: rgba(255,255,255,0.9);">Have questions? We're here to help. Reach out to our team today.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -20,17 +19,14 @@
             <div class="grid-2" style="gap: 4rem;">
                 <!-- Contact Info -->
                 <div>
-                    <p class="text-primary"
-                        style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
+                    <p class="text-primary" style="font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">
                         Get In Touch</p>
                     <h2>We'd Love to Hear From You</h2>
-                    <p>Whether you have a question about our services, pricing, or anything else, our team is ready to
-                        answer all your questions.</p>
+                    <p>Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.</p>
 
                     <div style="margin-top: 2rem;">
                         <div class="flex" style="gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;">
-                            <div class="icon-box"
-                                style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
+                            <div class="icon-box" style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
@@ -42,8 +38,7 @@
                         </div>
 
                         <div class="flex" style="gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;">
-                            <div class="icon-box"
-                                style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
+                            <div class="icon-box" style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div>
@@ -55,8 +50,7 @@
                         </div>
 
                         <div class="flex" style="gap: 1rem; align-items: flex-start;">
-                            <div class="icon-box"
-                                style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
+                            <div class="icon-box" style="width: 50px; height: 50px; flex-shrink: 0; font-size: 1.25rem;">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
@@ -78,12 +72,10 @@
 
                 <!-- Contact Form -->
                 <div class="card">
-                    <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-paper-plane text-primary"
-                            style="margin-right: 10px;"></i>Send a Message</h3>
+                    <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-paper-plane text-primary" style="margin-right: 10px;"></i>Send a Message</h3>
 
                     <% if (typeof success !=='undefined' && success) { %>
-                        <div
-                            style="background: #dcfce7; color: #16a34a; padding: 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1.5rem; text-align: center;">
+                        <div style="background: #dcfce7; color: #16a34a; padding: 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1.5rem; text-align: center;">
                             <i class="fas fa-check-circle"></i>
                             <%= success %>
                         </div>
@@ -92,24 +84,19 @@
                             <form action="/contact" method="POST">
                                 <div class="form-group">
                                     <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="John Doe"
-                                        required>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="form-control"
-                                        placeholder="john@example.com" required>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="subject">Subject</label>
-                                    <input type="text" id="subject" name="subject" class="form-control"
-                                        placeholder="How can we help?" required>
+                                    <input type="text" id="subject" name="subject" class="form-control" placeholder="How can we help?" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="message">Message</label>
-                                    <textarea id="message" name="message" class="form-control" rows="5"
-                                        placeholder="Write your message here..." required
-                                        style="resize: vertical;"></textarea>
+                                    <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here..." required style="resize: vertical;"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block"><i
                                         class="fas fa-paper-plane"></i> Send Message</button>

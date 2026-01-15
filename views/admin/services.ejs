@@ -4,32 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Services | <%= settings.site_name || 'LogisticCo' %>
+    <title>Manage Services |
+        <%= settings.site_name || 'LogisticCo' %>
     </title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
+         :root {
             --sidebar-width: 280px;
             --admin-bg: #0f172a;
             --admin-accent: #3b82f6;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: #f1f5f9;
             min-height: 100vh;
             display: flex;
         }
-
+        
         .admin-sidebar {
             width: var(--sidebar-width);
             background: var(--admin-bg);
@@ -41,13 +41,13 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .sidebar-logo {
             padding: 0 1.5rem 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 1.5rem;
         }
-
+        
         .sidebar-logo a {
             display: flex;
             align-items: center;
@@ -57,7 +57,7 @@
             font-weight: 700;
             font-size: 1.25rem;
         }
-
+        
         .sidebar-logo i {
             width: 40px;
             height: 40px;
@@ -67,16 +67,16 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .sidebar-nav {
             flex: 1;
             padding: 0 1rem;
         }
-
+        
         .nav-section {
             margin-bottom: 1.5rem;
         }
-
+        
         .nav-section-title {
             color: #64748b;
             font-size: 0.75rem;
@@ -85,7 +85,7 @@
             padding: 0 1rem;
             margin-bottom: 0.75rem;
         }
-
+        
         .nav-link {
             display: flex;
             align-items: center;
@@ -97,34 +97,34 @@
             margin-bottom: 0.25rem;
             transition: all 0.2s;
         }
-
+        
         .nav-link:hover {
             background: rgba(255, 255, 255, 0.05);
             color: white;
         }
-
+        
         .nav-link.active {
             background: var(--admin-accent);
             color: white;
         }
-
+        
         .nav-link i {
             width: 20px;
             text-align: center;
         }
-
+        
         .sidebar-footer {
             padding: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .user-card {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             color: white;
         }
-
+        
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -135,35 +135,35 @@
             justify-content: center;
             font-weight: 600;
         }
-
+        
         .user-info h4 {
             font-size: 0.9rem;
             margin-bottom: 0.125rem;
         }
-
+        
         .user-info span {
             font-size: 0.75rem;
             color: #64748b;
         }
-
+        
         .admin-main {
             flex: 1;
             margin-left: var(--sidebar-width);
             padding: 2rem;
         }
-
+        
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
-
+        
         .admin-header h1 {
             font-size: 1.75rem;
             color: #0f172a;
         }
-
+        
         .card {
             background: white;
             border-radius: 16px;
@@ -171,7 +171,7 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-
+        
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -180,23 +180,23 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #f1f5f9;
         }
-
+        
         .card-header h3 {
             font-size: 1.1rem;
             color: #0f172a;
             margin: 0;
         }
-
+        
         .form-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-
+        
         .form-group {
             margin-bottom: 1rem;
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
@@ -204,7 +204,7 @@
             color: #334155;
             font-size: 0.9rem;
         }
-
+        
         .form-control {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -214,19 +214,19 @@
             transition: all 0.2s;
             background: #f8fafc;
         }
-
+        
         .form-control:focus {
             outline: none;
             border-color: var(--admin-accent);
             background: white;
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
-
+        
         textarea.form-control {
             resize: vertical;
             min-height: 100px;
         }
-
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -240,23 +240,23 @@
             transition: all 0.2s;
             font-size: 0.9rem;
         }
-
+        
         .btn-primary {
             background: var(--admin-accent);
             color: white;
         }
-
+        
         .btn-primary:hover {
             background: #2563eb;
             transform: translateY(-2px);
         }
-
+        
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-
+        
         .service-card {
             background: white;
             border-radius: 16px;
@@ -266,32 +266,32 @@
             transition: all 0.2s;
             border: 1px solid #f1f5f9;
         }
-
+        
         .service-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
+        
         .service-card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 1rem;
         }
-
+        
         .service-card h3 {
             font-size: 1.1rem;
             color: #0f172a;
             margin: 0;
         }
-
+        
         .service-card p {
             color: #64748b;
             font-size: 0.9rem;
             margin: 0;
             line-height: 1.6;
         }
-
+        
         .delete-btn {
             width: 36px;
             height: 36px;
@@ -305,56 +305,118 @@
             justify-content: center;
             transition: all 0.2s;
         }
-
+        
         .delete-btn:hover {
             background: #dc2626;
             color: white;
         }
-
+        
         .empty-state {
             text-align: center;
             padding: 3rem;
             color: #94a3b8;
         }
-
+        
         .empty-state i {
             font-size: 3rem;
             margin-bottom: 1rem;
             opacity: 0.5;
         }
-
+        
         @media (max-width: 1024px) {
             .admin-sidebar {
                 width: 80px;
                 padding: 1rem 0;
             }
-
             .sidebar-logo span,
             .nav-section-title,
             .nav-link span,
             .user-info {
                 display: none;
             }
-
             .sidebar-logo a {
                 justify-content: center;
             }
-
             .nav-link {
                 justify-content: center;
                 padding: 1rem;
             }
-
             .user-card {
                 justify-content: center;
             }
-
             .admin-main {
                 margin-left: 80px;
             }
-
             .form-row {
                 grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                position: fixed;
+                left: -80px;
+                width: 80px;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+            .admin-sidebar.mobile-open {
+                left: 0;
+            }
+            .admin-main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-card {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-header h1 {
+                font-size: 1.25rem;
+            }
+            .card {
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+            }
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+            .form-control {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.9rem;
+            }
+            .service-card {
+                padding: 0.75rem;
+            }
+            .service-card h3 {
+                font-size: 0.95rem;
+            }
+            .empty-state {
+                padding: 2rem 1rem;
             }
         }
     </style>
@@ -402,34 +464,30 @@
     <main class="admin-main">
         <div class="admin-header">
             <div>
-                <h1><i class="fas fa-concierge-bell" style="margin-right: 0.5rem; color: var(--admin-accent);"></i>
-                    Manage Services</h1>
+                <h1><i class="fas fa-concierge-bell" style="margin-right: 0.5rem; color: var(--admin-accent);"></i> Manage Services</h1>
             </div>
         </div>
 
         <!-- Add Service Form -->
         <div class="card">
             <div class="card-header">
-                <h3><i class="fas fa-plus-circle" style="margin-right: 8px; color: var(--admin-accent);"></i>Add New
-                    Service</h3>
+                <h3><i class="fas fa-plus-circle" style="margin-right: 8px; color: var(--admin-accent);"></i>Add New Service
+                </h3>
             </div>
             <form action="/admin/services/add" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label>Service Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="e.g. Express Delivery"
-                            required>
+                        <input type="text" name="title" class="form-control" placeholder="e.g. Express Delivery" required>
                     </div>
                     <div class="form-group">
                         <label>Image URL (Optional)</label>
-                        <input type="text" name="image" class="form-control"
-                            placeholder="https://example.com/image.jpg">
+                        <input type="text" name="image" class="form-control" placeholder="https://example.com/image.jpg">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea name="description" class="form-control" placeholder="Describe the service..."
-                        required></textarea>
+                    <textarea name="description" class="form-control" placeholder="Describe the service..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Service</button>
             </form>
@@ -444,8 +502,7 @@
                             <h3>
                                 <%= service.title %>
                             </h3>
-                            <a href="/admin/services/delete/<%= service.id %>"
-                                onclick="return confirm('Delete this service?')" class="delete-btn">
+                            <a href="/admin/services/delete/<%= service.id %>" onclick="return confirm('Delete this service?')" class="delete-btn">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>

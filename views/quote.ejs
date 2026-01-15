@@ -1,14 +1,14 @@
 <%- include('partials/header') %>
 
     <!-- Page Hero -->
-    <section class="hero" style="padding: 6rem 0;">
-        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80" alt="Quote" class="hero-bg">
-        <div class="hero-overlay"></div>
+    <section class="hero-modern" style="min-height: 400px;">
+        <div class="hero-gradient"></div>
         <div class="container">
-            <div class="hero-content text-center" style="max-width: 100%;">
-                <h1 class="text-white">Get a Quote</h1>
-                <p style="max-width: 600px; margin: 0 auto;">Fill out the form below and our team will get back to you
-                    with a customized shipping quote.</p>
+            <div class="hero-modern-content" style="text-align: center;">
+                <div class="hero-text" style="max-width: 700px; margin: 0 auto;">
+                    <h1 style="margin-bottom: 1rem;">Get a Quote</h1>
+                    <p style="font-size: 1.1rem; margin-bottom: 3rem; color: rgba(255,255,255,0.9);">Fill out the form below and our team will get back to you with a customized shipping quote.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -19,12 +19,10 @@
             <div class="grid-2" style="gap: 4rem; align-items: start;">
                 <!-- Form -->
                 <div class="card">
-                    <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-file-invoice text-primary"
-                            style="margin-right: 10px;"></i>Request Quote</h3>
+                    <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-file-invoice text-primary" style="margin-right: 10px;"></i>Request Quote</h3>
 
                     <% if (typeof success !=='undefined' && success) { %>
-                        <div
-                            style="background: #dcfce7; color: #16a34a; padding: 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1.5rem; text-align: center;">
+                        <div style="background: #dcfce7; color: #16a34a; padding: 1rem; border-radius: var(--border-radius-sm); margin-bottom: 1.5rem; text-align: center;">
                             <i class="fas fa-check-circle"></i>
                             <%= success %>
                         </div>
@@ -34,21 +32,18 @@
                                 <div class="grid-2" style="gap: 1rem;">
                                     <div class="form-group">
                                         <label for="name">Full Name</label>
-                                        <input type="text" id="name" name="name" class="form-control"
-                                            placeholder="John Doe" required>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" id="email" name="email" class="form-control"
-                                            placeholder="john@example.com" required>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
                                     </div>
                                 </div>
 
                                 <div class="grid-2" style="gap: 1rem;">
                                     <div class="form-group">
                                         <label for="phone">Phone Number</label>
-                                        <input type="tel" id="phone" name="phone" class="form-control"
-                                            placeholder="+233 20 000 0000">
+                                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+233 20 000 0000">
                                     </div>
                                     <div class="form-group">
                                         <label for="service_type">Service Type</label>
@@ -66,34 +61,28 @@
                                 <div class="grid-2" style="gap: 1rem;">
                                     <div class="form-group">
                                         <label for="origin">Origin (City/Country)</label>
-                                        <input type="text" id="origin" name="origin" class="form-control"
-                                            placeholder="e.g., Shanghai, China" required>
+                                        <input type="text" id="origin" name="origin" class="form-control" placeholder="e.g., Shanghai, China" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="destination">Destination (City/Country)</label>
-                                        <input type="text" id="destination" name="destination" class="form-control"
-                                            placeholder="e.g., Tema, Ghana" required>
+                                        <input type="text" id="destination" name="destination" class="form-control" placeholder="e.g., Tema, Ghana" required>
                                     </div>
                                 </div>
 
                                 <div class="grid-2" style="gap: 1rem;">
                                     <div class="form-group">
                                         <label for="weight">Estimated Weight (kg)</label>
-                                        <input type="number" id="weight" name="weight" class="form-control"
-                                            placeholder="e.g., 500">
+                                        <input type="number" id="weight" name="weight" class="form-control" placeholder="e.g., 500">
                                     </div>
                                     <div class="form-group">
                                         <label for="cargo_type">Cargo Type</label>
-                                        <input type="text" id="cargo_type" name="cargo_type" class="form-control"
-                                            placeholder="e.g., Electronics, Textiles">
+                                        <input type="text" id="cargo_type" name="cargo_type" class="form-control" placeholder="e.g., Electronics, Textiles">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="details">Additional Details</label>
-                                    <textarea id="details" name="details" class="form-control" rows="4"
-                                        placeholder="Describe your shipment requirements..."
-                                        style="resize: vertical;"></textarea>
+                                    <textarea id="details" name="details" class="form-control" rows="4" placeholder="Describe your shipment requirements..." style="resize: vertical;"></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-block" style="padding: 1rem;"><i
@@ -105,14 +94,12 @@
                 <div>
                     <div class="card" style="margin-bottom: 2rem;">
                         <h4><i class="fas fa-clock text-primary" style="margin-right: 10px;"></i>Quick Response</h4>
-                        <p style="margin: 0;">Our team typically responds within 24 hours with a detailed quote tailored
-                            to your needs.</p>
+                        <p style="margin: 0;">Our team typically responds within 24 hours with a detailed quote tailored to your needs.</p>
                     </div>
 
                     <div class="card" style="margin-bottom: 2rem;">
                         <h4><i class="fas fa-tags text-primary" style="margin-right: 10px;"></i>Competitive Rates</h4>
-                        <p style="margin: 0;">We offer transparent pricing with no hidden fees. Get the best value for
-                            your logistics needs.</p>
+                        <p style="margin: 0;">We offer transparent pricing with no hidden fees. Get the best value for your logistics needs.</p>
                     </div>
 
                     <div class="card">

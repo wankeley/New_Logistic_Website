@@ -4,32 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Settings | <%= settings.site_name || 'LogisticCo' %>
+    <title>Site Settings |
+        <%= settings.site_name || 'LogisticCo' %>
     </title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
+         :root {
             --sidebar-width: 280px;
             --admin-bg: #0f172a;
             --admin-accent: #3b82f6;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: #f1f5f9;
             min-height: 100vh;
             display: flex;
         }
-
+        
         .admin-sidebar {
             width: var(--sidebar-width);
             background: var(--admin-bg);
@@ -41,13 +41,13 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .sidebar-logo {
             padding: 0 1.5rem 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 1.5rem;
         }
-
+        
         .sidebar-logo a {
             display: flex;
             align-items: center;
@@ -57,7 +57,7 @@
             font-weight: 700;
             font-size: 1.25rem;
         }
-
+        
         .sidebar-logo i {
             width: 40px;
             height: 40px;
@@ -67,16 +67,16 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .sidebar-nav {
             flex: 1;
             padding: 0 1rem;
         }
-
+        
         .nav-section {
             margin-bottom: 1.5rem;
         }
-
+        
         .nav-section-title {
             color: #64748b;
             font-size: 0.75rem;
@@ -85,7 +85,7 @@
             padding: 0 1rem;
             margin-bottom: 0.75rem;
         }
-
+        
         .nav-link {
             display: flex;
             align-items: center;
@@ -97,34 +97,34 @@
             margin-bottom: 0.25rem;
             transition: all 0.2s;
         }
-
+        
         .nav-link:hover {
             background: rgba(255, 255, 255, 0.05);
             color: white;
         }
-
+        
         .nav-link.active {
             background: var(--admin-accent);
             color: white;
         }
-
+        
         .nav-link i {
             width: 20px;
             text-align: center;
         }
-
+        
         .sidebar-footer {
             padding: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .user-card {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             color: white;
         }
-
+        
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -135,35 +135,35 @@
             justify-content: center;
             font-weight: 600;
         }
-
+        
         .user-info h4 {
             font-size: 0.9rem;
             margin-bottom: 0.125rem;
         }
-
+        
         .user-info span {
             font-size: 0.75rem;
             color: #64748b;
         }
-
+        
         .admin-main {
             flex: 1;
             margin-left: var(--sidebar-width);
             padding: 2rem;
         }
-
+        
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
-
+        
         .admin-header h1 {
             font-size: 1.75rem;
             color: #0f172a;
         }
-
+        
         .card {
             background: white;
             border-radius: 16px;
@@ -171,30 +171,30 @@
             padding: 2rem;
             max-width: 700px;
         }
-
+        
         .card-header {
             margin-bottom: 2rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #f1f5f9;
         }
-
+        
         .card-header h3 {
             font-size: 1.1rem;
             color: #0f172a;
             margin: 0;
         }
-
+        
         .form-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin-bottom: 1rem;
         }
-
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
@@ -202,7 +202,7 @@
             color: #334155;
             font-size: 0.9rem;
         }
-
+        
         .form-control {
             width: 100%;
             padding: 0.875rem 1rem;
@@ -212,26 +212,26 @@
             transition: all 0.2s;
             background: #f8fafc;
         }
-
+        
         .form-control:focus {
             outline: none;
             border-color: var(--admin-accent);
             background: white;
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
-
+        
         input[type="color"].form-control {
             height: 56px;
             cursor: pointer;
             padding: 0.5rem;
         }
-
+        
         .color-preview {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
+        
         .color-swatch {
             width: 40px;
             height: 40px;
@@ -239,7 +239,7 @@
             border: 2px solid #e2e8f0;
             flex-shrink: 0;
         }
-
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -253,18 +253,18 @@
             transition: all 0.2s;
             font-size: 1rem;
         }
-
+        
         .btn-primary {
             background: var(--admin-accent);
             color: white;
         }
-
+        
         .btn-primary:hover {
             background: #2563eb;
             transform: translateY(-2px);
             box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
         }
-
+        
         .success-message {
             background: #dcfce7;
             color: #16a34a;
@@ -275,39 +275,99 @@
             align-items: center;
             gap: 0.5rem;
         }
-
+        
         @media (max-width: 1024px) {
             .admin-sidebar {
                 width: 80px;
                 padding: 1rem 0;
             }
-
             .sidebar-logo span,
             .nav-section-title,
             .nav-link span,
             .user-info {
                 display: none;
             }
-
             .sidebar-logo a {
                 justify-content: center;
             }
-
             .nav-link {
                 justify-content: center;
                 padding: 1rem;
             }
-
             .user-card {
                 justify-content: center;
             }
-
             .admin-main {
                 margin-left: 80px;
             }
-
             .form-row {
                 grid-template-columns: 1fr;
+            }
+            .card {
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                position: fixed;
+                left: -80px;
+                width: 80px;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+            .admin-sidebar.mobile-open {
+                left: 0;
+            }
+            .admin-main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-header h1 {
+                font-size: 1.25rem;
+            }
+            .card {
+                padding: 0.75rem;
+            }
+            .card-header {
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.75rem;
+            }
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+            .form-control {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+            input[type="color"].form-control {
+                height: 48px;
+            }
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -362,8 +422,8 @@
 
         <div class="card">
             <div class="card-header">
-                <h3><i class="fas fa-sliders-h" style="margin-right: 8px; color: var(--admin-accent);"></i>General
-                    Settings</h3>
+                <h3><i class="fas fa-sliders-h" style="margin-right: 8px; color: var(--admin-accent);"></i>General Settings
+                </h3>
             </div>
 
             <form action="/admin/settings" method="POST">
@@ -371,15 +431,13 @@
                     <div class="form-group">
                         <label><i class="fas fa-building" style="margin-right: 8px; color: #94a3b8;"></i>Site
                             Name</label>
-                        <input type="text" name="site_name" class="form-control"
-                            value="<%= settings.site_name || 'Logistic Company' %>">
+                        <input type="text" name="site_name" class="form-control" value="<%= settings.site_name || 'Logistic Company' %>">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-palette" style="margin-right: 8px; color: #94a3b8;"></i>Primary
                             Color</label>
                         <div class="color-preview">
-                            <input type="color" name="primary_color" class="form-control" style="flex: 1;"
-                                value="<%= settings.primary_color || '#2563eb' %>" id="colorPicker">
+                            <input type="color" name="primary_color" class="form-control" style="flex: 1;" value="<%= settings.primary_color || '#2563eb' %>" id="colorPicker">
                         </div>
                     </div>
                 </div>
@@ -388,22 +446,19 @@
                     <div class="form-group">
                         <label><i class="fas fa-envelope" style="margin-right: 8px; color: #94a3b8;"></i>Contact
                             Email</label>
-                        <input type="email" name="contact_email" class="form-control"
-                            value="<%= settings.contact_email || '' %>" placeholder="info@company.com">
+                        <input type="email" name="contact_email" class="form-control" value="<%= settings.contact_email || '' %>" placeholder="info@company.com">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-phone" style="margin-right: 8px; color: #94a3b8;"></i>Contact
                             Phone</label>
-                        <input type="text" name="contact_phone" class="form-control"
-                            value="<%= settings.contact_phone || '' %>" placeholder="+233 20 000 0000">
+                        <input type="text" name="contact_phone" class="form-control" value="<%= settings.contact_phone || '' %>" placeholder="+233 20 000 0000">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label><i class="fas fa-map-marker-alt"
                             style="margin-right: 8px; color: #94a3b8;"></i>Address</label>
-                    <input type="text" name="address" class="form-control" value="<%= settings.address || '' %>"
-                        placeholder="123 Main Street, Accra, Ghana">
+                    <input type="text" name="address" class="form-control" value="<%= settings.address || '' %>" placeholder="123 Main Street, Accra, Ghana">
                 </div>
 
                 <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Settings</button>

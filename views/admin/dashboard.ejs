@@ -4,35 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | <%= settings.site_name || 'LogisticCo' %>
+    <title>Admin Dashboard |
+        <%= settings.site_name || 'LogisticCo' %>
     </title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
+         :root {
             --sidebar-width: 280px;
             --admin-bg: #0f172a;
             --admin-sidebar: #1e293b;
             --admin-accent: #3b82f6;
             --admin-card: #ffffff;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: #f1f5f9;
             min-height: 100vh;
             display: flex;
         }
-
         /* Sidebar */
+        
         .admin-sidebar {
             width: var(--sidebar-width);
             background: var(--admin-bg);
@@ -44,13 +44,13 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .sidebar-logo {
             padding: 0 1.5rem 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 1.5rem;
         }
-
+        
         .sidebar-logo a {
             display: flex;
             align-items: center;
@@ -60,7 +60,7 @@
             font-weight: 700;
             font-size: 1.25rem;
         }
-
+        
         .sidebar-logo i {
             width: 40px;
             height: 40px;
@@ -70,16 +70,16 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .sidebar-nav {
             flex: 1;
             padding: 0 1rem;
         }
-
+        
         .nav-section {
             margin-bottom: 1.5rem;
         }
-
+        
         .nav-section-title {
             color: #64748b;
             font-size: 0.75rem;
@@ -88,7 +88,7 @@
             padding: 0 1rem;
             margin-bottom: 0.75rem;
         }
-
+        
         .nav-link {
             display: flex;
             align-items: center;
@@ -100,34 +100,34 @@
             margin-bottom: 0.25rem;
             transition: all 0.2s;
         }
-
+        
         .nav-link:hover {
             background: rgba(255, 255, 255, 0.05);
             color: white;
         }
-
+        
         .nav-link.active {
             background: var(--admin-accent);
             color: white;
         }
-
+        
         .nav-link i {
             width: 20px;
             text-align: center;
         }
-
+        
         .sidebar-footer {
             padding: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .user-card {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             color: white;
         }
-
+        
         .user-avatar {
             width: 40px;
             height: 40px;
@@ -138,41 +138,41 @@
             justify-content: center;
             font-weight: 600;
         }
-
+        
         .user-info h4 {
             font-size: 0.9rem;
             margin-bottom: 0.125rem;
         }
-
+        
         .user-info span {
             font-size: 0.75rem;
             color: #64748b;
         }
-
         /* Main Content */
+        
         .admin-main {
             flex: 1;
             margin-left: var(--sidebar-width);
             padding: 2rem;
         }
-
+        
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
-
+        
         .admin-header h1 {
             font-size: 1.75rem;
             color: #0f172a;
         }
-
+        
         .header-actions {
             display: flex;
             gap: 1rem;
         }
-
+        
         .btn-logout {
             display: flex;
             align-items: center;
@@ -186,21 +186,21 @@
             font-weight: 500;
             transition: all 0.2s;
         }
-
+        
         .btn-logout:hover {
             background: #fef2f2;
             border-color: #fecaca;
             color: #dc2626;
         }
-
         /* Stats Grid */
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
+        
         .stat-card {
             background: white;
             padding: 1.5rem;
@@ -210,7 +210,7 @@
             align-items: center;
             gap: 1rem;
         }
-
+        
         .stat-icon {
             width: 56px;
             height: 56px;
@@ -220,47 +220,47 @@
             justify-content: center;
             font-size: 1.5rem;
         }
-
+        
         .stat-icon.blue {
             background: #dbeafe;
             color: #2563eb;
         }
-
+        
         .stat-icon.green {
             background: #dcfce7;
             color: #16a34a;
         }
-
+        
         .stat-icon.amber {
             background: #fef3c7;
             color: #d97706;
         }
-
+        
         .stat-icon.purple {
             background: #f3e8ff;
             color: #9333ea;
         }
-
+        
         .stat-info h3 {
             font-size: 1.75rem;
             color: #0f172a;
             margin-bottom: 0.25rem;
         }
-
+        
         .stat-info p {
             color: #64748b;
             font-size: 0.9rem;
             margin: 0;
         }
-
         /* Quick Actions */
+        
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
+        
         .action-card {
             background: white;
             padding: 1.5rem;
@@ -273,12 +273,12 @@
             align-items: center;
             gap: 1rem;
         }
-
+        
         .action-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
+        
         .action-icon {
             width: 56px;
             height: 56px;
@@ -291,33 +291,33 @@
             font-size: 1.5rem;
             flex-shrink: 0;
         }
-
+        
         .action-content h3 {
             font-size: 1rem;
             margin-bottom: 0.25rem;
             color: #0f172a;
         }
-
+        
         .action-content p {
             color: #64748b;
             font-size: 0.85rem;
             margin: 0;
         }
-
         /* Data Cards */
+        
         .data-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 1.5rem;
         }
-
+        
         .data-card {
             background: white;
             border-radius: 16px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-
+        
         .data-card-header {
             padding: 1.25rem 1.5rem;
             border-bottom: 1px solid #f1f5f9;
@@ -325,49 +325,49 @@
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .data-card-header h3 {
             font-size: 1rem;
             color: #0f172a;
             margin: 0;
         }
-
+        
         .data-card-body {
             padding: 1rem;
             max-height: 350px;
             overflow-y: auto;
         }
-
+        
         .data-item {
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 0.5rem;
             transition: background 0.2s;
         }
-
+        
         .data-item:hover {
             background: #f8fafc;
         }
-
+        
         .data-item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.5rem;
         }
-
+        
         .data-item h4 {
             font-size: 0.9rem;
             color: #0f172a;
             margin: 0;
         }
-
+        
         .data-item p {
             color: #64748b;
             font-size: 0.8rem;
             margin: 0;
         }
-
+        
         .status-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -375,22 +375,22 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
-
+        
         .status-badge.pending {
             background: #fef3c7;
             color: #d97706;
         }
-
+        
         .status-badge.transit {
             background: #dbeafe;
             color: #2563eb;
         }
-
+        
         .status-badge.delivered {
             background: #dcfce7;
             color: #16a34a;
         }
-
+        
         .view-all-link {
             display: block;
             text-align: center;
@@ -401,51 +401,195 @@
             border-top: 1px solid #f1f5f9;
             transition: background 0.2s;
         }
-
+        
         .view-all-link:hover {
             background: #f8fafc;
         }
-
+        
         .empty-state {
             text-align: center;
             padding: 2rem;
             color: #94a3b8;
         }
-
+        
         .empty-state i {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             opacity: 0.5;
         }
-
+        /* Analytics Styles */
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .analytics-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .analytics-card h3 {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-placeholder {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: #94a3b8;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mini-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .mini-stat {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .mini-stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--admin-accent);
+            margin-bottom: 0.25rem;
+        }
+        
+        .mini-stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        .delivery-rate {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .delivery-rate-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #16a34a, #4ade80);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
         @media (max-width: 1024px) {
             .admin-sidebar {
                 width: 80px;
                 padding: 1rem 0;
             }
-
             .sidebar-logo span,
             .nav-section-title,
             .nav-link span,
             .user-info {
                 display: none;
             }
-
             .sidebar-logo a {
                 justify-content: center;
             }
-
             .nav-link {
                 justify-content: center;
                 padding: 1rem;
             }
-
             .user-card {
                 justify-content: center;
             }
-
             .admin-main {
                 margin-left: 80px;
+            }
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                position: fixed;
+                left: -80px;
+                width: 80px;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s;
+            }
+            .admin-sidebar.mobile-open {
+                left: 0;
+            }
+            .admin-main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-actions {
+                width: 100%;
+            }
+            .header-actions .btn-logout {
+                width: 100%;
+                justify-content: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-header h1 {
+                font-size: 1.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+            .stat-info h3 {
+                font-size: 1.5rem;
+            }
+            .quick-actions {
+                gap: 1rem;
+            }
+            .action-card {
+                padding: 1rem;
+            }
+            .action-icon {
+                width: 48px;
+                height: 48px;
             }
         }
     </style>
@@ -521,11 +665,11 @@
         <div class="admin-header">
             <div>
                 <h1>Dashboard</h1>
-                <p style="color: #64748b; margin-top: 0.25rem;">Welcome back, <%= user.username %>!</p>
+                <p style="color: #64748b; margin-top: 0.25rem;">Welcome back,
+                    <%= user.username %>!</p>
             </div>
             <div class="header-actions">
-                <a href="/admin/shipments" class="btn-logout"
-                    style="background: var(--admin-accent); color: white; border: none;">
+                <a href="/admin/shipments" class="btn-logout" style="background: var(--admin-accent); color: white; border: none;">
                     <i class="fas fa-plus"></i> New Shipment
                 </a>
             </div>
@@ -601,21 +745,26 @@
             <!-- Recent Messages -->
             <div class="data-card">
                 <div class="data-card-header">
-                    <h3><i class="fas fa-envelope" style="margin-right: 8px; color: var(--admin-accent);"></i>Recent
-                        Messages</h3>
+                    <h3><i class="fas fa-envelope" style="margin-right: 8px; color: var(--admin-accent);"></i>Recent Messages
+                    </h3>
                 </div>
                 <div class="data-card-body">
                     <% if (messages && messages.length> 0) { %>
-                        <% messages.forEach(msg=> { %>
-                            <div class="data-item">
+                        <% messages.forEach((msg, index)=> { %>
+                            <script>
+                                var msgData_ <%= index %> = <%= JSON.stringify(msg) %>;
+                            </script>
+                            <div class="data-item" onclick="openMessageModal(msgData_<%= index %>)" style="cursor: pointer; transition: all 0.2s;">
                                 <div class="data-item-header">
                                     <h4>
                                         <%= msg.subject %>
                                     </h4>
                                 </div>
                                 <p>
-                                    <%= msg.name %> &bull; <%= msg.email %>
+                                    <%= msg.name %> &bull;
+                                        <%= msg.email %>
                                 </p>
+                                <small style="color: #999; display: block; margin-top: 5px;">Click to view details</small>
                             </div>
                             <% }); %>
                                 <% } else { %>
@@ -630,8 +779,7 @@
             <!-- Recent Shipments -->
             <div class="data-card">
                 <div class="data-card-header">
-                    <h3><i class="fas fa-shipping-fast"
-                            style="margin-right: 8px; color: var(--admin-accent);"></i>Recent Shipments</h3>
+                    <h3><i class="fas fa-shipping-fast" style="margin-right: 8px; color: var(--admin-accent);"></i>Recent Shipments</h3>
                 </div>
                 <div class="data-card-body">
                     <% if (shipments && shipments.length> 0) { %>
@@ -641,13 +789,13 @@
                                     <h4>
                                         <%= ship.tracking_number %>
                                     </h4>
-                                    <span
-                                        class="status-badge <%= ship.status === 'Pending' ? 'pending' : ship.status === 'In Transit' ? 'transit' : 'delivered' %>">
+                                    <span class="status-badge <%= ship.status === 'Pending' ? 'pending' : ship.status === 'In Transit' ? 'transit' : 'delivered' %>">
                                         <%= ship.status %>
                                     </span>
                                 </div>
                                 <p>
-                                    <%= ship.origin %> &rarr; <%= ship.destination %>
+                                    <%= ship.origin %> &rarr;
+                                        <%= ship.destination %>
                                 </p>
                             </div>
                             <% }); %>
@@ -662,7 +810,266 @@
                         class="fas fa-arrow-right"></i></a>
             </div>
         </div>
+
+        <!-- Analytics Section -->
+        <div style="margin-top: 3rem;">
+            <h2 style="margin-bottom: 2rem; color: #0f172a;">Performance Analytics</h2>
+            <div class="analytics-grid">
+                <!-- Shipment Status Distribution -->
+                <div class="analytics-card">
+                    <h3><i class="fas fa-chart-pie" style="margin-right: 8px;"></i>Shipment Status</h3>
+                    <div class="chart-placeholder">
+                        <svg viewBox="0 0 100 100" style="width: 150px; height: 150px;">
+                            <!-- Pie chart (simplified visual) -->
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#2563eb" stroke-width="15" stroke-dasharray="60 100" />
+                            <circle cx="50" cy="50" r="30" fill="white" />
+                        </svg>
+                    </div>
+                    <div class="mini-stats">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" style="color: #d97706;">
+                                <%= shipments ? shipments.filter(s=> s.status === 'Pending').length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">Pending</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" style="color: #2563eb;">
+                                <%= shipments ? shipments.filter(s=> s.status === 'In Transit').length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">In Transit</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" style="color: #16a34a;">
+                                <%= shipments ? shipments.filter(s=> s.status === 'Delivered').length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">Delivered</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value" style="color: #dc2626;">
+                                <%= shipments ? shipments.filter(s=> s.status === 'Held').length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">Held</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Performance -->
+                <div class="analytics-card">
+                    <h3><i class="fas fa-tachometer-alt" style="margin-right: 8px;"></i>Delivery Performance</h3>
+                    <div style="padding: 1rem 0;">
+                        <p style="margin-bottom: 1rem; color: #64748b;">Overall Delivery Rate</p>
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <div style="font-size: 2.5rem; font-weight: 700; color: #16a34a; margin-bottom: 0.5rem;">
+                                <% 
+                                    let delivered = shipments ? shipments.filter(s => s.status === 'Delivered').length : 0;
+                                    let total = shipments ? shipments.length : 1;
+                                    let rate = total > 0 ? Math.round((delivered / total) * 100) : 0;
+                                %>
+                                    <%= rate %>%
+                            </div>
+                            <div class="delivery-rate">
+                                <div class="delivery-rate-bar" style="width: <%= rate %>%;"></div>
+                            </div>
+                        </div>
+                        <div class="mini-stats">
+                            <div class="mini-stat">
+                                <div class="mini-stat-value">
+                                    <%= delivered %>
+                                </div>
+                                <div class="mini-stat-label">Delivered</div>
+                            </div>
+                            <div class="mini-stat">
+                                <div class="mini-stat-value">
+                                    <%= total - delivered %>
+                                </div>
+                                <div class="mini-stat-label">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="analytics-card">
+                    <h3><i class="fas fa-activity" style="margin-right: 8px;"></i>Activity Summary</h3>
+                    <div class="mini-stats" style="margin-top: 1rem;">
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">
+                                <%= messages ? messages.length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">Messages</div>
+                        </div>
+                        <div class="mini-stat">
+                            <div class="mini-stat-value">
+                                <%= shipments ? shipments.length : 0 %>
+                            </div>
+                            <div class="mini-stat-label">Total Shipments</div>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 10px; padding: 1rem; margin-top: 1rem; text-align: center;">
+                        <p style="margin: 0; color: #2563eb; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> Monitor your logistics performance in real-time
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <!-- Message Detail Modal -->
+    <div id="messageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 12px; width: 90%; max-width: 700px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+            <div style="padding: 2rem; border-bottom: 1px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h2 id="modalSubject" style="margin: 0 0 0.5rem 0; color: #0f172a;"></h2>
+                        <p id="modalSender" style="margin: 0; color: #64748b; font-size: 0.95rem;"></p>
+                        <p id="modalDate" style="margin: 0.5rem 0 0 0; color: #94a3b8; font-size: 0.85rem;"></p>
+                    </div>
+                    <button onclick="closeMessageModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div style="padding: 2rem;">
+                <h3 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b;">Message Details</h3>
+                <div id="modalContent" style="line-height: 1.6; color: #334155;"></div>
+            </div>
+            <div style="padding: 2rem; border-top: 1px solid #e2e8f0;">
+                <h3 style="margin: 0 0 1.5rem 0; color: #0f172a; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b;">Create Shipment</h3>
+                <form id="quickShipmentForm" style="display: grid; gap: 1rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Tracking Number</label>
+                            <input type="text" id="trackingNumber" name="tracking_number" placeholder="e.g., TRK001" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Status</label>
+                            <select id="shipmentStatus" name="status" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;">
+                                <option value="Pending">Pending</option>
+                                <option value="In Transit">In Transit</option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Held">Held</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Origin</label>
+                            <input type="text" id="origin" name="origin" placeholder="e.g., Accra" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Destination</label>
+                            <input type="text" id="destination" name="destination" placeholder="e.g., Kumasi" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Current Location</label>
+                            <input type="text" id="currentLocation" name="current_location" placeholder="e.g., Port of Tema" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: #0f172a; font-weight: 500; font-size: 0.9rem;">Est. Delivery Date</label>
+                            <input type="date" id="estimatedDelivery" name="estimated_delivery" style="width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9rem;" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div style="padding: 1.5rem; border-top: 1px solid #e2e8f0; display: flex; gap: 1rem;">
+                <button type="submit" form="quickShipmentForm" onclick="submitQuickShipment(event)" style="flex: 1; padding: 0.75rem 1.5rem; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.2s;">
+                    Create Shipment
+                </button>
+                <button onclick="closeMessageModal()" style="flex: 1; padding: 0.75rem 1.5rem; background: #f1f5f9; color: #0f172a; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.2s;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openMessageModal(message) {
+            const modal = document.getElementById('messageModal');
+            const formatDate = (dateStr) => {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            };
+
+            document.getElementById('modalSubject').textContent = message.subject || 'No Subject';
+            document.getElementById('modalSender').textContent = `From: ${message.name} (${message.email})`;
+            document.getElementById('modalDate').textContent = formatDate(message.created_at);
+            document.getElementById('modalContent').innerHTML = `<p style="white-space: pre-wrap; word-wrap: break-word;">${(message.message || 'No message content').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`;
+
+            // Clear the form
+            document.getElementById('quickShipmentForm').reset();
+
+            // Pre-fill sender information if available
+            if (message.name) {
+                document.getElementById('trackingNumber').value = 'TRK-' + Date.now();
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeMessageModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        function submitQuickShipment(event) {
+            event.preventDefault();
+
+            const formData = {
+                tracking_number: document.getElementById('trackingNumber').value,
+                sender_name: document.getElementById('modalSender').textContent.replace('From: ', '').split(' (')[0],
+                receiver_name: document.getElementById('modalSender').textContent.split('(')[1] ? .replace(')', '') || '',
+                origin: document.getElementById('origin').value,
+                destination: document.getElementById('destination').value,
+                current_location: document.getElementById('currentLocation').value,
+                status: document.getElementById('shipmentStatus').value,
+                estimated_delivery: document.getElementById('estimatedDelivery').value
+            };
+
+            fetch('/admin/shipments/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(formData)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Shipment created successfully!');
+                        closeMessageModal();
+                        // Reload page to show new shipment
+                        setTimeout(() => location.reload(), 500);
+                    } else {
+                        alert('Error creating shipment');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error creating shipment: ' + error.message);
+                });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('messageModal') ? .addEventListener('click', (e) => {
+            if (e.target.id === 'messageModal') {
+                closeMessageModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMessageModal();
+            }
+        });
+    </script>
 </body>
 
 </html>
