@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const multer = require('multer');
 const db = require('./db/database');
 
@@ -25,12 +25,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Global Middleware for Site Settings & User Session
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     res.locals.user = req.session.user || null;
     res.locals.path = req.path;
 
     // Load site settings for every view
-    db.all("SELECT key, value FROM site_settings", (err, rows) => {
+    try {
+        const rows = await db.all("SELECT key, value FROM site_settings", []);
         const settings = {};
         if (rows) {
             rows.forEach(row => {
@@ -38,8 +39,11 @@ app.use((req, res, next) => {
             });
         }
         res.locals.settings = settings;
-        next();
-    });
+    } catch (err) {
+        console.error('Error loading settings:', err);
+        res.locals.settings = {};
+    }
+    next();
 });
 
 // Routes
@@ -49,18 +53,27 @@ const adminRoutes = require('./routes/admin');
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
 
-// Seed Admin User (Basic check)
+// Seed Admin User
 const seedAdmin = async () => {
-    db.get("SELECT * FROM users WHERE username = 'admin'", async (err, row) => {
+    try {
+        const row = await db.get("SELECT * FROM users WHERE username = 'admin'", []);
         if (!row) {
-            const hashedPassword = await bcrypt.hash('admin123', 10);
-            db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['admin', hashedPassword, 'admin']);
+            const hashedPassword = await bcryptjs.hash('admin123', 10);
+            await db.run("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ['admin', hashedPassword, 'admin']);
             console.log("Admin user created: admin / admin123");
         }
-    });
+    } catch (err) {
+        console.error('Error seeding admin:', err);
+    }
 };
-seedAdmin();
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Start server only after DB is ready
+db.ready().then(() => {
+    seedAdmin();
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}).catch(err => {
+    console.error('Failed to initialize database:', err);
+    process.exit(1);
 });

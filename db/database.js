@@ -4,16 +4,17 @@ const path = require('path');
 
 const dbPath = path.join(__dirname, 'logistic.db');
 let db = null;
+let dbInitialized = false;
 
 async function initDb() {
     const SQL = await initSqlJs();
-    
+
     // Load existing database or create new one
     let fileBuffer = null;
     if (fs.existsSync(dbPath)) {
         fileBuffer = fs.readFileSync(dbPath);
     }
-    
+
     db = new SQL.Database(fileBuffer);
 
     // Site Settings
@@ -62,12 +63,12 @@ async function initDb() {
         message TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
-    
+
     // Seed default settings if empty
     try {
         const result = db.exec("SELECT count(*) as count FROM site_settings");
         const count = result.length > 0 ? result[0].values[0][0] : 0;
-        
+
         if (count === 0) {
             const settings = [
                 { key: 'site_name', value: 'Ghana Logistics' },
@@ -83,9 +84,10 @@ async function initDb() {
     } catch (e) {
         console.log('Settings already seeded or error:', e.message);
     }
-    
+
     saveDatabase();
     console.log('Connected to the SQLite database.');
+    dbInitialized = true;
     return db;
 }
 
@@ -98,22 +100,26 @@ function saveDatabase() {
 }
 
 // Initialize on module load
-let dbPromise = initDb();
+const dbPromise = initDb();
 
 // Export functions for querying
 module.exports = {
+    ready: async () => {
+        await dbPromise;
+        return db;
+    },
     getDb: async () => {
         if (!db) {
-            db = await dbPromise;
+            await dbPromise;
         }
         return db;
     },
-    run: async (sql, params) => {
+    run: async (sql, params = []) => {
         const database = await module.exports.getDb();
         database.run(sql, params);
         saveDatabase();
     },
-    get: async (sql, params) => {
+    get: async (sql, params = []) => {
         const database = await module.exports.getDb();
         const result = database.exec(sql, params);
         if (result.length > 0 && result[0].values.length > 0) {
@@ -127,7 +133,7 @@ module.exports = {
         }
         return null;
     },
-    all: async (sql, params) => {
+    all: async (sql, params = []) => {
         const database = await module.exports.getDb();
         const result = database.exec(sql, params);
         if (result.length > 0) {

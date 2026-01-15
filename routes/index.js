@@ -8,7 +8,7 @@ router.get('/login', (req, res) => {
     res.render('login', { title: 'Login', error: null });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     const { username, password } = req.body;
     try {
         const user = await db.get("SELECT * FROM users WHERE username = ?", [username]);
@@ -29,7 +29,7 @@ router.get('/register', (req, res) => {
     res.render('register', { title: 'Register', error: null });
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', async(req, res) => {
     const { username, password, confirm_password } = req.body;
     if (password !== confirm_password) {
         return res.render('register', { title: 'Register', error: 'Passwords do not match' });
@@ -51,7 +51,7 @@ router.get('/logout', (req, res) => {
 
 
 // Home
-router.get('/', async (req, res) => {
+router.get('/', async(req, res) => {
     try {
         const services = await db.all("SELECT * FROM services LIMIT 3", []);
         res.render('index', { title: 'Home', services: services });
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
 });
 
 // Services
-router.get('/services', async (req, res) => {
+router.get('/services', async(req, res) => {
     try {
         const services = await db.all("SELECT * FROM services", []);
         res.render('services', { title: 'Our Services', services: services });
@@ -71,7 +71,7 @@ router.get('/services', async (req, res) => {
 });
 
 // Tracking
-router.get('/tracking', async (req, res) => {
+router.get('/tracking', async(req, res) => {
     const trackingId = req.query.id;
     let shipment = null;
     let error = null;
@@ -105,11 +105,10 @@ router.get('/quote', (req, res) => {
 });
 
 // Handle Quote Submission (Simple logging or DB save)
-router.post('/quote', async (req, res) => {
+router.post('/quote', async(req, res) => {
     const { name, email, details } = req.body;
     try {
-        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, 'Quote Request', ?)",
-            [name, email, details]);
+        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, 'Quote Request', ?)", [name, email, details]);
         res.redirect('/quote?success=true');
     } catch (err) {
         console.error(err);
@@ -118,11 +117,10 @@ router.post('/quote', async (req, res) => {
 });
 
 // Handle Contact Submission
-router.post('/contact', async (req, res) => {
+router.post('/contact', async(req, res) => {
     const { name, email, subject, message } = req.body;
     try {
-        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, ?, ?)",
-            [name, email, subject, message]);
+        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, ?, ?)", [name, email, subject, message]);
         res.redirect('/contact?success=true');
     } catch (err) {
         console.error(err);

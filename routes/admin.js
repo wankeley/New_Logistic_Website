@@ -17,7 +17,7 @@ router.get('/login', (req, res) => {
 });
 
 // Login POST
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     const { username, password } = req.body;
     try {
         const user = await db.get("SELECT * FROM users WHERE username = ?", [username]);
@@ -40,7 +40,7 @@ router.get('/logout', (req, res) => {
 });
 
 // Dashboard
-router.get('/dashboard', isAuthenticated, async (req, res) => {
+router.get('/dashboard', isAuthenticated, async(req, res) => {
     try {
         const messages = await db.all("SELECT * FROM messages ORDER BY created_at DESC LIMIT 5", []);
         const shipments = await db.all("SELECT * FROM shipments ORDER BY created_at DESC LIMIT 5", []);
@@ -56,7 +56,7 @@ router.get('/settings', isAuthenticated, (req, res) => {
     res.render('admin/settings', { title: 'Site Settings' });
 });
 
-router.post('/settings', isAuthenticated, async (req, res) => {
+router.post('/settings', isAuthenticated, async(req, res) => {
     const settings = req.body;
     try {
         for (const [key, value] of Object.entries(settings)) {
@@ -70,7 +70,7 @@ router.post('/settings', isAuthenticated, async (req, res) => {
 });
 
 // Services Management
-router.get('/services', isAuthenticated, async (req, res) => {
+router.get('/services', isAuthenticated, async(req, res) => {
     try {
         const services = await db.all("SELECT * FROM services", []);
         res.render('admin/services', { title: 'Manage Services', services });
@@ -79,7 +79,7 @@ router.get('/services', isAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/services/add', isAuthenticated, async (req, res) => {
+router.post('/services/add', isAuthenticated, async(req, res) => {
     const { title, description, image } = req.body;
     try {
         await db.run("INSERT INTO services (title, description, image) VALUES (?, ?, ?)", [title, description, image]);
@@ -90,7 +90,7 @@ router.post('/services/add', isAuthenticated, async (req, res) => {
     }
 });
 
-router.get('/services/delete/:id', isAuthenticated, async (req, res) => {
+router.get('/services/delete/:id', isAuthenticated, async(req, res) => {
     try {
         await db.run("DELETE FROM services WHERE id = ?", [req.params.id]);
         res.redirect('/admin/services');
@@ -101,7 +101,7 @@ router.get('/services/delete/:id', isAuthenticated, async (req, res) => {
 });
 
 // Shipments Management
-router.get('/shipments', isAuthenticated, async (req, res) => {
+router.get('/shipments', isAuthenticated, async(req, res) => {
     try {
         const shipments = await db.all("SELECT * FROM shipments ORDER BY created_at DESC", []);
         res.render('admin/shipments', { title: 'Manage Shipments', shipments });
@@ -110,12 +110,11 @@ router.get('/shipments', isAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/shipments/add', isAuthenticated, async (req, res) => {
+router.post('/shipments/add', isAuthenticated, async(req, res) => {
     const { tracking_number, sender_name, receiver_name, origin, destination, current_location, status, estimated_delivery } = req.body;
     try {
         await db.run(`INSERT INTO shipments (tracking_number, sender_name, receiver_name, origin, destination, current_location, status, estimated_delivery) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [tracking_number, sender_name, receiver_name, origin, destination, current_location, status, estimated_delivery]);
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [tracking_number, sender_name, receiver_name, origin, destination, current_location, status, estimated_delivery]);
         res.redirect('/admin/shipments');
     } catch (err) {
         console.error(err);
@@ -123,11 +122,10 @@ router.post('/shipments/add', isAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/shipments/update/:id', isAuthenticated, async (req, res) => {
+router.post('/shipments/update/:id', isAuthenticated, async(req, res) => {
     const { current_location, status, estimated_delivery } = req.body;
     try {
-        await db.run("UPDATE shipments SET current_location = ?, status = ?, estimated_delivery = ? WHERE id = ?",
-            [current_location, status, estimated_delivery, req.params.id]);
+        await db.run("UPDATE shipments SET current_location = ?, status = ?, estimated_delivery = ? WHERE id = ?", [current_location, status, estimated_delivery, req.params.id]);
         res.redirect('/admin/shipments');
     } catch (err) {
         console.error(err);
