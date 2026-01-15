@@ -1,25 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 // Auth Routes
 router.get('/login', (req, res) => {
     res.render('login', { title: 'Login', error: null });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    db.get("SELECT * FROM users WHERE username = ?", [username], async (err, user) => {
-        if (err) return console.error(err);
-        if (user && await bcrypt.compare(password, user.password)) {
+    try {
+        const user = await db.get("SELECT * FROM users WHERE username = ?", [username]);
+        if (user && await bcryptjs.compare(password, user.password)) {
             req.session.user = user;
             if (user.role === 'admin') return res.redirect('/admin/dashboard');
             res.redirect('/');
         } else {
             res.render('login', { title: 'Login', error: 'Invalid Credentials' });
         }
-    });
+    } catch (err) {
+        console.error(err);
+        res.render('login', { title: 'Login', error: 'Error logging in' });
+    }
 });
 
 router.get('/register', (req, res) => {
@@ -33,15 +36,11 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        db.run("INSERT INTO users (username, password, role) VALUES (?, ?, 'user')", [username, hashedPassword], (err) => {
-            if (err) {
-                return res.render('register', { title: 'Register', error: 'Username already exists' });
-            }
-            res.redirect('/login');
-        });
+        const hashedPassword = await bcryptjs.hash(password, 10);
+        await db.run("INSERT INTO users (username, password, role) VALUES (?, ?, 'user')", [username, hashedPassword]);
+        res.redirect('/login');
     } catch (e) {
-        res.render('register', { title: 'Register', error: 'Error creating user' });
+        res.render('register', { title: 'Register', error: 'Username already exists or error creating user' });
     }
 });
 
@@ -52,39 +51,42 @@ router.get('/logout', (req, res) => {
 
 
 // Home
-router.get('/', (req, res) => {
-    db.all("SELECT * FROM services LIMIT 3", (err, services) => {
+router.get('/', async (req, res) => {
+    try {
+        const services = await db.all("SELECT * FROM services LIMIT 3", []);
         res.render('index', { title: 'Home', services: services });
-    });
+    } catch (err) {
+        res.render('index', { title: 'Home', services: [] });
+    }
 });
 
 // Services
-router.get('/services', (req, res) => {
-    db.all("SELECT * FROM services", (err, services) => {
+router.get('/services', async (req, res) => {
+    try {
+        const services = await db.all("SELECT * FROM services", []);
         res.render('services', { title: 'Our Services', services: services });
-    });
+    } catch (err) {
+        res.render('services', { title: 'Our Services', services: [] });
+    }
 });
 
 // Tracking
-router.get('/tracking', (req, res) => {
+router.get('/tracking', async (req, res) => {
     const trackingId = req.query.id;
     let shipment = null;
     let error = null;
 
     if (trackingId) {
-        db.get("SELECT * FROM shipments WHERE tracking_number = ?", [trackingId], (err, row) => {
-            if (err) {
-                error = "Database error";
-            } else if (!row) {
+        try {
+            shipment = await db.get("SELECT * FROM shipments WHERE tracking_number = ?", [trackingId]);
+            if (!shipment) {
                 error = "Shipment not found";
-            } else {
-                shipment = row;
             }
-            res.render('tracking', { title: 'Track Shipment', shipment: shipment, error: error, trackingId: trackingId });
-        });
-    } else {
-        res.render('tracking', { title: 'Track Shipment', shipment: null, error: null, trackingId: '' });
+        } catch (err) {
+            error = "Database error";
+        }
     }
+    res.render('tracking', { title: 'Track Shipment', shipment: shipment, error: error, trackingId: trackingId || '' });
 });
 
 // About
@@ -103,25 +105,29 @@ router.get('/quote', (req, res) => {
 });
 
 // Handle Quote Submission (Simple logging or DB save)
-router.post('/quote', (req, res) => {
-    // In a real app, send email or save to DB
-    // For now, let's save to messages
+router.post('/quote', async (req, res) => {
     const { name, email, details } = req.body;
-    db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, 'Quote Request', ?)",
-        [name, email, details], (err) => {
-            if (err) console.error(err);
-            res.redirect('/quote?success=true');
-        });
+    try {
+        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, 'Quote Request', ?)",
+            [name, email, details]);
+        res.redirect('/quote?success=true');
+    } catch (err) {
+        console.error(err);
+        res.redirect('/quote?error=true');
+    }
 });
 
 // Handle Contact Submission
-router.post('/contact', (req, res) => {
+router.post('/contact', async (req, res) => {
     const { name, email, subject, message } = req.body;
-    db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, ?, ?)",
-        [name, email, subject, message], (err) => {
-            if (err) console.error(err);
-            res.redirect('/contact?success=true');
-        });
+    try {
+        await db.run("INSERT INTO messages (name, email, subject, message) VALUES (?, ?, ?, ?)",
+            [name, email, subject, message]);
+        res.redirect('/contact?success=true');
+    } catch (err) {
+        console.error(err);
+        res.redirect('/contact?error=true');
+    }
 });
 
 module.exports = router;
